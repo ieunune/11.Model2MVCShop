@@ -65,7 +65,7 @@
 			
 			var search = {searchKeyword : $("#searchKeyword").val(), searchCondition : $("#searchCondition").val()};
 			var convertSearch = JSON.stringify(search);
-			 
+			
 			$.ajax({
 				url : "/product/json/listProduct/"+menu+"/"+pageSize ,
 				method : "POST",
@@ -84,21 +84,23 @@
 			});
 		});
 		
+//		배송하기 (구현예정) 
 		$(".ct_list_pop td:nth-child(9)").on("click", function(){
 			$(window.parent.frames["rightFrame"].document.location).attr("href","/purchase/updateTranCode?prodNo="+$(this).children("input").val()+"&menu="+$("#menu").val());
 			alert('배송이 완료되었습니다.')
 		});
 		
+// 		페이지 처리를 위한 스크립트
 		 $( "button.btn.btn-default" ).on("click" , function() {
 				fncGetUserList(1);
 		});
 		
 		 
-		$(".table.table-hover.table-striped td:nth-child(2)").on("click", function(){
+		$(".table.table-hover.table-striped td:nth-child(1)").on("click", function(){
 			self.location="/product/getProduct?prodNo="+$(this).children("input").val()+"&menu="+$("#menu").val();
 		});
 		
-		$( ".table.table-hover.table-striped td:nth-child(2)" ).css("color" , "red").css("font-weight","bolder");
+		$( ".table.table-hover.table-striped td:nth-child(1)" ).css("color" , "black").css("font-weight","bolder");
 		$("h7").css("color" , "red").css("font-weight","bolder");
 		$(".table.table-hover.table-striped:nth-child(2n+1)" ).css("background-color" , "#f2f2f2");
 		
@@ -134,41 +136,39 @@
 	    <hr/>
 	    
 	    <div class="row">
-	    	<div class="col-md-3 text-center">
+	    	<div class="col-md-6">
 	    		<form class="form-inline" name="detailForm">
 	    		
+	    			<div class="form-group">	    				
+	    				<p class="text-primary">
+	    				표시개수 
+	 					</p>	 				
+	    			</div>
+	    				    			
 	    			<div class="form-group">
-	    				
-	    			<p class="text-primary">
-	    			표시개수
-	 				</p>
-	    				
-	    			<select name="pageSize" id="selectPageSize" onchange="javascript:getPageSize()">
+	    				<select name="pageSize" id="selectPageSize" onchange="javascript:getPageSize()">
 							<%-- ${ ! empty search.pageSize == 0 ? "selected" : "" }--%>
-							<option value="5" ${ search.pageSize == 5 ? "selected" : "" }>5</option>
-							<option value="8" ${ search.pageSize == 8 ? "selected" : "" }>8</option>
-							<option value="10" ${ search.pageSize == 10 ? "selected" : "" } >10</option>
+							<option value="6" ${ search.pageSize == 6 ? "selected" : "" }>6</option>
+							<option value="9" ${ search.pageSize == 9 ? "selected" : "" }>9</option>
+							<option value="12" ${ search.pageSize == 12 ? "selected" : "" } >12</option>
 							<option value="15" ${ search.pageSize == 15 ? "selected" : "" } >15</option>
-					</select>
-					
+						</select>
 					</div>
+					
+					<div class="form-group">
+	    				<a href="/product/listProduct?menu=${param.menu}&order=1&pageSize=${search.pageSize}">▲ 높은가격순</a>
+	    				&nbsp;
+						<a href="/product/listProduct?menu=${param.menu}&order=2&pageSize=${search.pageSize}">▼ 낮은가격순</a>
+					</div>
+					
 	    		</form>
 	    	</div>
 	    	
-	    	<div class="col-md-3 text-center">
-	    		<form class="form-inline" name="detailForm">
-					
-			    	<div class="form-group">
-	    				<a href="/product/listProduct?menu=${param.menu}&order=1&pageSize=${search.pageSize}">▲ 높은가격순</a><br>
-						<a href="/product/listProduct?menu=${param.menu}&order=2&pageSize=${search.pageSize}">▼ 낮은가격순</a>
-					</div>
-	    		</form>
-	    	</div>
 	     <div class="col-md-6 text-right">
 			    <form class="form-inline" name="detailForm">
 					
 				  <div class="form-group">
-				    <select class="form-control" name="searchCondition" >
+				    <select class="form-control" id="searchCondition" name="searchCondition" >
 				    	<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
 						<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
 						<option value="2" ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
@@ -192,34 +192,38 @@
 		
 		<hr/>
 	
-	<h7>상품명 클릭시 상품페이지로 이동합니다.</h7>
+	<h7>제품 이미지 클릭시 상품페이지로 이동합니다.</h7>
+	
+	<br>
+	
+	<c:set var="i" value="0" />
+		<c:forEach var="product" items="${list}">
+	<div class="col-md-4 col-sm-6 col-xm-12" style="float:center;">
+
 	<table class="table table-hover table-striped">
-      
-        <thead>
-          <tr>
-            <th align="center">No</th>
-            <th align="left">상품명</th>
-            <th align="left">가격</th>
-            <th align="left">등록일</th>
-            <th align="left">현재상태</th>
-          </tr>
-        </thead>
-       
+	  
 		<tbody>		
-		  <c:set var="i" value="0" />
-		  <c:forEach var="product" items="${list}">
-			<c:set var="i" value="${ i+1 }" />
+		 
 			<tr>
-			  <td align="center">${ i }
-			  	<input type="hidden" value="${product.prodNo}">
+			  <td align="center">
+			  	<img src="/images/uploadFiles/${product.fileName}" width="auto" height="300px"/>
+			  	<input type="hidden" id="prodNo" value="${product.prodNo}">
 			  </td>
-			  <td align="left">
+			</tr>
+			<tr>
+			  <td align="center">
 			  	${product.prodName}
 			  	<input type="hidden" id="prodNo" value="${product.prodNo}">
 			  </td>
-			  <td align="left">${product.price}</td>
-			  <td align="left">${product.manuDate}</td>
-			  <td align="left">
+			</tr>
+			<tr>
+			  <td align="center">${product.price}원</td>
+			</tr>
+			<tr>
+			<td align="center">${product.manuDate}</td>
+			</tr>
+			<tr>
+			  <td align="center">
 			 		<input type="hidden" id="prodNo" value="${product.prodNo}">
 					<input type="hidden" id="tranCode" value="${product.proTranCode}">
 					<c:if test="${product.proTranCode==null}">
@@ -239,12 +243,14 @@
 					</c:if>
 				</td>
 			</tr>
-          </c:forEach>
+          
         </tbody>      
       </table>
-	
+      </div>
+		</c:forEach>
+			
 	</div>
-	
+
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
 
 </body>
