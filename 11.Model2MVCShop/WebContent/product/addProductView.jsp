@@ -105,7 +105,7 @@ $(function () {
 	
 	<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>力炼老磊</strong></div>
-	  		<div class="col-xs-7 col-md-3"><input type="text" class="form-control" id="manuDate" name="manuDate" placeholder="力炼老磊"></div>
+	  		<div class="col-xs-7 col-md-3"><input type="text" class="form-control" id="manuDate" name="manuDate" placeholder="力炼老磊" readonly="readonly"></div>
 	  		<div class="col-xs-1 col-md-1"><img src="../images/ct_icon_date.gif" width="15" height="15" onclick="show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value)"/></div>	
 	</div>
 	

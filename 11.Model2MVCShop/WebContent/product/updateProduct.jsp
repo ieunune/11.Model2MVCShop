@@ -1,15 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-<title>상품수정</title>
+<!--  meta  -->
+<meta charset="EUC-KR">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!--  bootstrap CDN  -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<!--  bootstrap Dropdown CSS & JS  -->
+<link href="/css/animate.min.css" rel="stylesheet">
+<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
+<!--  CSS -->
+<style>
+     body {
+            padding-top : 50px;
+        }
+</style>
 
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="../javascript/calendar.js"></script>
-
 <script type="text/javascript">
 
 function fncUpdateProduct(){
@@ -57,7 +72,9 @@ $(function () {
 
 </head>
 
-<body bgcolor="#ffffff" text="#000000">
+<body>
+
+<jsp:include page="/layout/toolbar.jsp" />
 
 <form name="detailForm" enctype="multipart/form-data">
 

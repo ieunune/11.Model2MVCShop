@@ -142,7 +142,7 @@ public class PurchaseController {
 	@RequestMapping("/updateTranCode")
 	public String updateTranCode(@RequestParam("prodNo") int prodNo, HttpServletRequest request) throws Exception{
 		
-		System.out.println("/updatePurchase");
+		System.out.println("/updatePurchase \n @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		
 		purchaseService.updateTranCode(prodNo);
 		
