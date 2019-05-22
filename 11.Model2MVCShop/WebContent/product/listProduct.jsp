@@ -175,7 +175,7 @@
 				</table>
 				
 	    	</div>
-	    	<div class="col-md-6 text-right">
+	    	<div class="col-md-6 col-md-6 col-sm-6 col-xm-12 text-right">
 			   	<form class="form-inline" name="detailForm">
 					<div class="form-group">
 				    	<select class="form-control" id="searchCondition" name="searchCondition" >
@@ -236,7 +236,6 @@
 						&nbsp;<p>
 						&nbsp;<p>
 					</div>
-<!--         			<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> -->
       			</div>
   		</div>	
 	</c:forEach>

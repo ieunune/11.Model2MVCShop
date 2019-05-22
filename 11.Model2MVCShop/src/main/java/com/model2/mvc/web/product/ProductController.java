@@ -97,7 +97,27 @@ public class ProductController {
 	
 	@RequestMapping("/getProduct")
 	public String getProduct( @RequestParam("menu") String menu, @RequestParam("prodNo") int prodNo , Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-			
+		
+		request.setCharacterEncoding("utf-8");
+		
+		String history = "";
+		Cookie[] cookies = request.getCookies();
+		if (cookies!=null && cookies.length > 0) {
+			for (int i = 0; i < cookies.length; i++) {
+				Cookie cookie = cookies[i];
+				if (cookie.getName().equals("history")) {
+					history = cookie.getValue();
+				}
+			}
+		}
+		
+		history += ","+ prodNo;
+		System.out.println("Get Product history :: " + history);
+		Cookie coo = new Cookie("history", history);
+		coo.setPath("/");
+		coo.setMaxAge(60);
+		response.addCookie(coo);
+		
 		/*String history="";
 		cookie = new Cookie("history",String.valueOf(prodNo));
 		System.out.println("cookie : " + cookie.getValue());

@@ -45,6 +45,20 @@
    			background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
 		}
 		
+		.carousel-indicators li {	
+   			border-radius: 10px;
+   			margin: 1px 8px;
+   			height: 10px;
+    		max-width: 10px;
+    		border: 1px solid #FFF;
+    		background-color: transparent;
+		}
+		.carousel-indicators .active {
+    		background-color: #fff;
+    		max-width: 12px;
+    		margin: 0 8px;
+    		height: 12px;
+		}
    	</style>
    	
      <!--  ///////////////////////// JavaScript ////////////////////////// -->

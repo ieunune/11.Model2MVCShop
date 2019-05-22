@@ -40,11 +40,18 @@ $(function () {
 		$("form").attr("action","/comment/addComment?prod_no="+${product.prodNo}).attr("method","POST").submit();
 	});
 	
+//	퀵메뉴바
+// 	var currentPosition = parseInt($(".quick").css("top")); 
+//     $(window).scroll(function() { 
+//             var position = $(window).scrollTop(); // 현재 스크롤바의 위치값을 반환합니다. 
+//             $(".quick").stop().animate({"top":position+currentPosition+"px"},500); 
+//     });
 });
 </script>
 </head>
 
 <body>
+ 
 	
 	<jsp:include page="/layout/toolbar.jsp" />
 	
@@ -60,11 +67,8 @@ $(function () {
 	    </div>
 	    
 	    <div class="row">
-			<div class="col-xs-12 col-md-6"><img src="/images/uploadFiles/${product.fileName}" width="auto" height="500px"/></div>
-			<div class="col-xs-12 col-md-3"><h4><b>${product.prodName}</b></h4></div>
-			<hr>
-			<div class="col-xs-12 col-md-3"><h4>&#8361;${product.price}<small>&nbsp;배송비 제외</small></h4></div>
-			<p>
+			<div class="col-xs-12 col-md-6"><img src="/images/uploadFiles/${product.fileName}" onerror="this.src='/images/uploadFiles/ImageTemp.png'" width="auto" height="500px"/></div>
+			<div class="col-xs-12 col-md-6"><h4>상품번호: ${product.prodNo}</h4><br><h4><b>${product.prodName}</b></h4><h4>&#8361;${product.price}<small>&nbsp;배송비 제외</small></h4></div>			
 		</div>
 		
 <!-- 	    <div class="row"> -->
@@ -91,7 +95,8 @@ $(function () {
 			<div class="col-xs-4 col-md-4" align="center">${product.manuDate}</div>
 			<div class="col-xs-4 col-md-4" align="center">${product.regDate}</div>
 		</div>
-		
+
+	
 		<div class="row">
 			&nbsp;<p>
 			&nbsp;<p>
