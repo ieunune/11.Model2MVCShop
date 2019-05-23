@@ -34,6 +34,7 @@
     h7 { color : red; }
     .row.display-flex { display: flex; flex-wrap: wrap; }
 	.thumbnail {
+		width: auto;
 		height: 250px;
 	}
 	.thumbnail img{
@@ -148,7 +149,7 @@
 	    <hr/>
 	    
 	    <div class="row">
-	    	<div class="col-md-6 col-sm-6 col-xm-12 ">
+	    	<div class="col-md-6 col-sm-5 col-xm-12">
 	    		
 	    		<table>
 	    			<tr>
@@ -175,7 +176,7 @@
 				</table>
 				
 	    	</div>
-	    	<div class="col-md-6 col-md-6 col-sm-6 col-xm-12 text-right">
+	    	<div class="col-md-6 col-md-6 col-sm-7 col-xm-12 text-right">
 			   	<form class="form-inline" name="detailForm">
 					<div class="form-group">
 				    	<select class="form-control" id="searchCondition" name="searchCondition" >
@@ -188,9 +189,10 @@
 				  	<div class="form-group">
 				    	<label class="sr-only" for="searchKeyword">검색어</label>
 				    	<input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+				    	<button type="button" class="btn btn-default">검색</button>
 				  	</div>
 				  
-				  	<button type="button" class="btn btn-default">검색</button>
+				  	
 				  
 				  	<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  	<input type="hidden" id="currentPage" name="currentPage" value=""/>
@@ -207,11 +209,19 @@
 	<div class="row">
 	<c:set var="i" value="0" />
 	<c:forEach var="product" items="${list}">	
-  		<div class="col-md-4 col-sm-6 col-xs-6">
+  		<div class="col-md-4 col-sm-4 col-xm-6">
+  			<c:if test="${product.proTranCode==null}">
     		<a href="#" class="thumbnail">
     			<input type="hidden" id="prodNo" value="${product.prodNo}">
       			<img src="/images/uploadFiles/${product.fileName}" onerror="this.src='/images/uploadFiles/ImageTemp.png'"/>
    			</a>
+    		</c:if>
+    		<c:if test="${product.proTranCode!=null}">
+    		<div class="thumbnail">
+    			<input type="hidden" id="prodNo" value="${product.prodNo}">
+      			<img src="/images/uploadFiles/${product.fileName}" onerror="this.src='/images/uploadFiles/ImageTemp.png'"/>
+   			</div>
+    		</c:if>
    			<div class="caption" align="center">
         			<h3><b>${product.prodName}</b></h3>
         			<p>${product.price}&nbsp;원</p>

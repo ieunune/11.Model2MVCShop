@@ -44,7 +44,7 @@ public class CommentController {
 		System.out.println("comment :: " + comment);
 		
 		commentService.addComment(comment);
-		return "redirect:/comment/listComment?prod_No="+prodNo;
+		return "redirect:/comment/listComment?prod_No="+prodNo+"&menu=search";
 	}
 	
 	@RequestMapping("/updateComment")

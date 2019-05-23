@@ -260,7 +260,7 @@
 	 	 	<div class="col-md-12">
 				<div class="jumbotron">
 					<div class="text-center">
-			  		<h1>Eunwoo MVC Shop</h1>
+			  		<h2>Eunwoo MVC Shop</h2>
 			  		<p>비회원은 검색만 가능합니다.</p>
 			  		<p>로그인 후 이용해주세요.</p>
 			  		</div>
@@ -276,7 +276,7 @@
 			  				<i class="glyphicon glyphicon-search">상품보기</i>
 			  			</a>
 			  		</div>
-			  	
+			  					  	
 			  	</div>
 	        </div>
 	   	 	<!--  Main end /////////////////////////////////////-->   		

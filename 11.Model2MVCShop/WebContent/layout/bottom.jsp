@@ -6,7 +6,8 @@
 
 <style>
 	#footer{
-		bottom: 0;
+		position:relative;
+		bottom : 0;
 		background: black; 
 		color:white; 
 		width: 100%; 
