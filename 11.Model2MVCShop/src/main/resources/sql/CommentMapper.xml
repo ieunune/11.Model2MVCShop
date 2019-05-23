@@ -11,16 +11,17 @@
 		<result property="commentNo" 	column="comment_no" 		jdbcType="NUMERIC"/>
 		<result property="prodNo"		column="prod_no" 			jdbcType="NUMERIC" />
 		<result property="reply" 		column="reply"				jdbcType="VARCHAR" />
-		<result property="inputDate" 	column="input_date"			jdbcType="DATE" />
+		<result property="inputDate" 	column="input_date"			jdbcType="VARCHAR" />
+		<result property="userId" 		column="user_id"			jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
 	<insert id="addComment"	parameterType="comment" >
-	INSERT INTO comments VALUES (seq_comments_comment_no.nextval, #{prodNo} ,#{reply} , SYSDATE)
+	INSERT INTO comments VALUES (seq_comments_comment_no.nextval, #{prodNo} ,#{reply} , to_char(sysdate, 'yyyy/mm/dd hh:mi:ss'), #{userId})
 	 </insert>
 	
 	<select id="getCommentList" parameterType="int" resultMap="commentSelectMap">
-		SELECT comment_no, prod_no, reply, input_date 
+		SELECT comment_no, prod_no, reply, input_date, user_id 
 		FROM comments 
 		WHERE prod_no = #{value}		
 	 </select>

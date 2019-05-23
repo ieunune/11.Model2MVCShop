@@ -143,5 +143,6 @@ $(function () {
 
 	</form>
 </div>
+<jsp:include page="/layout/bottom.jsp"></jsp:include>
 </body>
 </html>

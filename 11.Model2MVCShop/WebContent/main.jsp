@@ -43,8 +43,7 @@
    			box-shadow: 0px 0px;
    			background-color: rgba(0,0,0,0.0);			 
    			background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
-		}
-		
+		}		
 		.carousel-indicators li {	
    			border-radius: 10px;
    			margin: 1px 8px;
@@ -131,9 +130,7 @@
 	
 	<hr>
 	
-	<div id=footer style="background: #aeaeaf; width: 100%; height: 100px; vertical-align: middle" align="center">
-		<label>Copyright.</label>
-	</div>
+	<jsp:include page="/layout/bottom.jsp"></jsp:include>
 	
 </body>
 

@@ -3,6 +3,7 @@ package com.model2.mvc.web.comment;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.model2.mvc.service.comment.CommentService;
 import com.model2.mvc.service.domain.Comment;
+import com.model2.mvc.service.domain.User;
 
 @Controller
 @RequestMapping("/comment/*")
@@ -27,8 +29,12 @@ public class CommentController {
 	}
 	
 	@RequestMapping("/addComment")
-	public String addProductView(@ModelAttribute("comment") Comment comment, @RequestParam("prod_no") int prodNo, HttpServletRequest request) throws Exception { 
+	public String addProductView(@ModelAttribute("comment") Comment comment, @RequestParam("prod_no") int prodNo, HttpServletRequest request, HttpSession session) throws Exception { 
 		
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		User user = (User)session.getAttribute("user");
+		System.out.println("getUserId :: " + user.getUserId());
+		comment.setUserId(user.getUserId());
 		System.out.println("comment :: " + comment);
 		comment.setProdNo(prodNo);
 		System.out.println(request.getParameter("reply"));

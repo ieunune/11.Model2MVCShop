@@ -147,7 +147,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/updateProductView")
-	public String updateUserView( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
+	public String updateProductView( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
 
 		System.out.println("/updateUserView");
 
@@ -171,7 +171,10 @@ public class ProductController {
 		
 		productService.updateProduct(product);
 		
-		return "redirect:/product/updateProductView?prodNo="+prodNo;
+		product = productService.getProduct(prodNo);
+		
+		model.addAttribute("product", product);
+		return "redirect:/product/getProduct?prodNo="+prodNo+"&menu=search";
 	}
 	
 	@RequestMapping("/listProduct")

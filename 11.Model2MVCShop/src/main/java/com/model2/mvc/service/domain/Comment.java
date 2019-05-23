@@ -8,9 +8,16 @@ public class Comment {
 	private int commentNo;
 	private int prodNo;
 	private String reply;
-	private Date InputDate;
+	private String InputDate;
+	private String userId;
 	
 	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public int getCommentNo() {
 		return commentNo;
 	}
@@ -29,10 +36,10 @@ public class Comment {
 	public void setReply(String reply) {
 		this.reply = reply;
 	}
-	public Date getInputDate() {
+	public String getInputDate() {
 		return InputDate;
 	}
-	public void setInputDate(Date inputDate) {
+	public void setInputDate(String inputDate) {
 		InputDate = inputDate;
 	}
 

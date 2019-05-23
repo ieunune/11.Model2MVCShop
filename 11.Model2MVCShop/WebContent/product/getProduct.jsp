@@ -30,11 +30,8 @@
 
 <script type="text/javascript">
 $(function () {
-	$("td.ct_btn01:contains('구매')").on("click", function(){
+	$("#purchase").on("click", function(){
 		$(self.location).attr("href","/purchase/addPurchaseView?prod_no="+$("#prodNo").text().trim());
-	});
-	$("td.ct_btn01:contains('이전')").on("click", function(){
-		history.go(-1);
 	});
 	$("#commentGo").on("click",function(){
 		$("form").attr("action","/comment/addComment?prod_no="+${product.prodNo}).attr("method","POST").submit();
@@ -67,8 +64,17 @@ $(function () {
 	    </div>
 	    
 	    <div class="row">
-			<div class="col-xs-12 col-md-6"><img src="/images/uploadFiles/${product.fileName}" onerror="this.src='/images/uploadFiles/ImageTemp.png'" width="auto" height="500px"/></div>
-			<div class="col-xs-12 col-md-6"><h4>상품번호: ${product.prodNo}</h4><br><h4><b>${product.prodName}</b></h4><h4>&#8361;${product.price}<small>&nbsp;배송비 제외</small></h4></div>			
+			<div class="col-xs-12 col-md-7"><img src="/images/uploadFiles/${product.fileName}" onerror="this.src='/images/uploadFiles/ImageTemp.png'" width="600px" height="500px"/></div>
+			<div class="col-xs-12 col-md-5">
+				<h4>모델번호: ${product.prodNo}</h4><br>
+				<h4><b>${product.prodName}</b></h4>
+				<h4>&#8361;${product.price}<small>&nbsp;배송비 제외</small></h4>
+				<div style="vertical-align: bottom;">				
+				<button id="purchase" style="background-color: black; color: white; width: 100%; height: 40px;">
+				<h6><span class="glyphicon glyphicon-shopping-cart"><b>구매하기</b></span></h6>
+				</button>
+				</div>
+			</div>			
 		</div>
 		
 <!-- 	    <div class="row"> -->
@@ -100,134 +106,53 @@ $(function () {
 		<div class="row">
 			&nbsp;<p>
 			&nbsp;<p>
-			&nbsp;<p>
 		</div>
 		<hr>
 		
+		<form>
 		<div class="row">
-			<button style="background-color: black; color: white; width: 100%; height: 40px;">
-				<h6><span class="glyphicon glyphicon-shopping-cart">구매하기</span></h6>
-			</button>
+			<div class="col-xs-4 col-md-12" align="left"><b><h3>한줄평</h3></b></div>
+		</div>
+				
+		<c:forEach var="comment" items="${list}">
+		<div class="row">
+			<div class="col-sm-10 col-md-10" align="left">
+			<h4>
+				<b>${comment.userId}</b>&nbsp;
+				<small>${comment.inputDate}</small>&nbsp;
+			</h4>
+			<h5>${comment.reply}</h5>
+			</div>
+			<div class="col-sm-2 col-md-2" align="right">
+				<span class="glyphicon glyphicon-refresh"></span>
+				<span class="glyphicon glyphicon-remove"></span>
+			</div>
+		</div>
+		</c:forEach>
+		<br>
+		
+		<div class="row">
+			<div class="col-sm-10 col-md-10" align="center">
+				<input type="text" name="reply" class="form-control" style="width: 100%; height: 40px" placeholder="댓글입력" />
+			</div>
+			<div class="col-sm-2 col-md-2" align="center">
+				<button id="commentGo" style="background-color: black; color: white; width: 100%; height: 40px;">
+				<h6>댓글달기</h6>
+				</button>
+			</div>
 		</div>
 		
-		<p>
+		</form>
+		
+		<div class="row">
+			&nbsp;<p>
+			&nbsp;<p>
+		</div>
 		
 	</div>
-	
-<!-- 	<form name="detailForm" method="post"> -->
 
-<!-- 		<table width="100%" border="0" cellspacing="0" cellpadding="0" -->
-<!-- 			style="margin-top: 13px;"> -->
-<!-- 			<tr> -->
-<!-- 				<td height="1" colspan="3" bgcolor="D6D6D6"></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td width="104" class="ct_write">상품번호 <img -->
-<!-- 					src="/images/ct_icon_red.gif" width="3" height="3" -->
-<!-- 					align="absmiddle" /> -->
-<!-- 				</td> -->
-<!-- 				<td bgcolor="D6D6D6" width="1"></td> -->
-<!-- 				<td class="ct_write01"> -->
-<!-- 					<table width="100%" border="0" cellspacing="0" cellpadding="0"> -->
-<!-- 						<tr> -->
-<%-- 							<td width="105" id="prodNo">${ product.prodNo }</td> --%>
-<!-- 						</tr> -->
-<!-- 					</table> -->
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td height="1" colspan="3" bgcolor="D6D6D6"></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td width="104" class="ct_write">상품명 <img -->
-<!-- 					src="/images/ct_icon_red.gif" width="3" height="3" -->
-<!-- 					align="absmiddle" /> -->
-<!-- 				</td> -->
-<!-- 				<td bgcolor="D6D6D6" width="1"></td> -->
-<%-- 				<td class="ct_write01">${ product.prodName }</td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td height="1" colspan="3" bgcolor="D6D6D6"></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td width="104" class="ct_write">상품이미지 <img -->
-<!-- 					src="/images/ct_icon_red.gif" width="3" height="3" -->
-<!-- 					align="absmiddle" /> -->
-<!-- 				</td> -->
-<!-- 				<td bgcolor="D6D6D6" width="1"></td> -->
-<%-- 				<td class="ct_write01"><img src="/images/uploadFiles/${product.fileName}" width="auto" height="300px"/> --%>
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td height="1" colspan="3" bgcolor="D6D6D6"></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td width="104" class="ct_write">상품상세정보 <img -->
-<!-- 					src="/images/ct_icon_red.gif" width="3" height="3" -->
-<!-- 					align="absmiddle" /> -->
-<!-- 				</td> -->
-<!-- 				<td bgcolor="D6D6D6" width="1"></td> -->
-<%-- 				<td class="ct_write01">${product.prodDetail}</td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td height="1" colspan="3" bgcolor="D6D6D6"></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td width="104" class="ct_write">제조일자</td> -->
-<!-- 				<td bgcolor="D6D6D6" width="1"></td> -->
-<%-- 				<td class="ct_write01">${product.manuDate}</td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td height="1" colspan="3" bgcolor="D6D6D6"></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td width="104" class="ct_write">가격</td> -->
-<!-- 				<td bgcolor="D6D6D6" width="1"></td> -->
-<%-- 				<td class="ct_write01">${product.price}</td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td height="1" colspan="3" bgcolor="D6D6D6"></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td width="104" class="ct_write">등록일자</td> -->
-<!-- 				<td bgcolor="D6D6D6" width="1"></td> -->
-<%-- 				<td class="ct_write01">${product.regDate}</td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td height="1" colspan="3" bgcolor="D6D6D6"></td> -->
-<!-- 			</tr> -->
-<!-- 		</table> -->
-	
-<!-- 		<br> -->
-<!-- 		<table width="100%" height="37" border="0" cellpadding="0" cellspacing="0"> -->
-<!-- 			<tr> -->
-<!-- 				<td width="15" height="37"><img src="/images/ct_ttl_img01.gif" -->
-<!-- 					width="15" height="37"></td> -->
-<!-- 				<td background="/images/ct_ttl_img02.gif" width="100%" -->
-<!-- 					style="padding-left: 10px;"> -->
-<!-- 					<table width="100%" border="0" cellspacing="0" cellpadding="0"> -->
-<!-- 						<tr> -->
-<!-- 							<td width="93%" class="ct_ttl01">한줄평</td> -->
-<!-- 							<td width="20%" align="right">&nbsp;</td> -->
-<!-- 						</tr> -->
-<!-- 					</table> -->
-<!-- 				</td> -->
-<!-- 				<td width="12" height="37"><img src="/images/ct_ttl_img03.gif" -->
-<!-- 					width="12" height="37" /></td> -->
-<!-- 			</tr> -->
-<!-- 		</table> -->
-		
-<!-- 		<table width="100%" border="0" cellspacing="0" cellpadding="0" -->
-<!-- 				style="margin-top: 10px;"> -->
-<!-- 				<tr> -->
-<!-- 					<td class="ct_list_b" width="70%">내용</td> -->
-<!-- 					<td class="ct_line02"></td> -->
-<!-- 					<td class="ct_list_b" width="30%">등록일자</td> -->
-<!-- 					<td class="ct_line02"></td> -->
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<!-- 					<td colspan="11" bgcolor="808285" height="1"></td> -->
-<!-- 				</tr> -->
+<jsp:include page="/layout/bottom.jsp"></jsp:include>
+
 <%-- 				<c:set var="i" value="0"/> --%>
 <%-- 				<c:forEach var="comment" items="${list}">  --%>
 <%-- 					<c:set var="i" value="${i+1}"/> --%>

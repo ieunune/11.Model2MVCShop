@@ -241,65 +241,9 @@
 	</c:forEach>
 	</div>
 	<p>
-		
-<!-- 	<div class="col-md-4 col-sm-6 col-xs-6 thumnail" style="float:center;" id="thumnail"> -->
-
-<!-- 	<table class="table-hover"> -->
-	  
-<!-- 		<tbody id="thumnail">		 -->
-		 	
-<!-- 			<tr> -->
-<!-- 			  <td align="center"> -->
-<%-- 			  	<img src="/images/uploadFiles/${product.fileName}" onerror="this.src='/images/uploadFiles/ImageTemp.png'" width="300px" height="300px"/> --%>
-<%-- 			  	<input type="hidden" id="prodNo" value="${product.prodNo}"> --%>
-<!-- 			  </td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 			  <td align="center"> -->
-<%-- 			  	<b>${product.prodName}</b> --%>
-<%-- 			  	<input type="hidden" id="prodNo" value="${product.prodNo}"> --%>
-<!-- 			  </td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<%-- 			  <td align="center">${product.price}원</td> --%>
-<!-- 			</tr> -->
-<%-- 			<%-- <tr> --%>
-<%-- 			<td align="center">${product.manuDate}</td> --%>
-<%-- 			</tr> --%>
-<!-- 			<tr> -->
-<!-- 			  <td align="center"> -->
-<%-- 			 		<input type="hidden" id="prodNo" value="${product.prodNo}"/> --%>
-<%-- 					<input type="hidden" id="tranCode" value="${product.proTranCode}"/> --%>
-<%-- 					<c:if test="${product.proTranCode==null}"> --%>
-<!-- 						판매중 -->
-<%-- 					</c:if> --%>
-<%-- 					<c:if test="${product.proTranCode=='000'}"> --%>
-<!-- 						구매완료 -->
-<%-- 					<c:if test="${param.menu=='manage'}"> --%>
-<!-- 						<a id="tranState">배송하기 -->
-<%-- 							<input type="hidden" id="prodNo" value="${product.prodNo}"/> --%>
-<!-- 						</a>  -->
-<%-- 						</c:if> --%>
-<%-- 					</c:if> --%>
-<%-- 					<c:if test="${product.proTranCode=='001'}"> --%>
-<!-- 						배송중 -->
-<%-- 					</c:if> --%>
-<%-- 					<c:if test="${product.proTranCode=='002'}"> --%>
-<!-- 						배송완료 -->
-<%-- 					</c:if> --%>
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>&nbsp;</td> -->
-<!-- 			</tr>           -->
-<!--         </tbody>       -->
-<!--       </table> -->
-<!--       </div> -->
-
-			
 	</div>
 
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
-
+	<jsp:include page="/layout/bottom.jsp"></jsp:include>
 </body>
 </html>
