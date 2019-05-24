@@ -87,7 +87,7 @@ public class PurchaseController {
 		
 		model.addAttribute("purchase", purchase);
 		
-		return "forward:/purchase/addPurchase.jsp";
+		return "forward:/purchase/listPurchase";
 	}
 	
 	
@@ -175,9 +175,7 @@ public class PurchaseController {
 		User user = (User)session.getAttribute("user");
 		System.out.println(" listPurchase User :: " + user);
 		Map<String , Object> map=purchaseService.getPurchaseList(search, user.getUserId());
-		System.out.println(" 111111111 ");
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println(" 222222222 ");
 		
 		System.out.println("==================== DEBUG START =======================");
 		System.out.println(" :: resultPage :: " + resultPage + " :: ");

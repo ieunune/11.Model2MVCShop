@@ -9,6 +9,7 @@
 	<resultMap id="purchaseSelectMap" type="purchase">
 		<result property="tranNo" 		 column="tran_no" 			jdbcType="NUMERIC"/>
 		<result property="purchaseProd.prodNo" column="prod_no" 	jdbcType="NUMERIC"/>
+		<result property="purchaseProd.fileName" column="image_file" 	jdbcType="VARCHAR"/>
 		<result property="buyer.userId"		 column="buyer_id" 			jdbcType="VARCHAR"/>
 		<result property="paymentOption" column="payment_option"	jdbcType="VARCHAR"/>
 		<result property="receiverName"	 column="receiver_name"		jdbcType="VARCHAR"/>
@@ -18,6 +19,7 @@
 		<result property="tranCode" 	 column="tran_status_code" 	jdbcType="VARCHAR"/>
 		<result property="orderDate"	 column="order_data"		jdbcType="DATE"/>
 		<result property="divyDate"	 	 column="DLVY_DATE"			jdbcType="DATE"/>
+			
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
@@ -81,10 +83,11 @@
 	<select id="getPurchaseList" parameterType="hashmap" resultMap="purchaseSelectMap">
 		SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT 
-										*
-										FROM transaction
+	  					FROM		(	SELECT t.* , p.IMAGE_FILE  
+	  									FROM transaction t, product p
 										WHERE
+											t.prod_no = p.prod_no
+											AND
 											buyer_id = #{buyerId}
 										ORDER BY tran_no ) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )

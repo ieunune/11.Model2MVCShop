@@ -65,31 +65,27 @@ $(function () {
 	    <div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-7" align="center"><img src="/images/uploadFiles/${product.fileName}" onerror="this.src='/images/uploadFiles/ImageTemp.png'" width="600px" height="500px"/></div>
 			<div class="col-xs-12 col-sm-12 col-md-5">
+				
 				<h4><b>${product.prodName}</b></h4>
+				
 				<h4>&#8361;${product.price}<small>&nbsp;배송비 제외</small></h4>
+				
 				<div style="vertical-align: bottom;">
-				<h5>모델번호: ${product.prodNo}</h5><br>
-<%-- 				<c:if test="${product.amount == 0}">				 --%>
-				<button id="purchase" style="background-color: black; color: white; width: 100%; height: 40px;">
-				<h6><span class="glyphicon glyphicon-shopping-cart"> <b> 구매하기</b></span></h6>
-				</button>
-<%-- 				</c:if> --%>
-<%-- 				<c:if test="${product.amount != 0}">				 --%>
-<!-- 				<button id="request" style="background-color: black; color: white; width: 100%; height: 40px;"> -->
-<!-- 				<h6><span class="glyphicon glyphicon-shopping-cart"> <b> 재입고요청</b></span></h6> -->
-<!-- 				</button> -->
-<%-- 				</c:if> --%>
+					<h5>모델번호: ${product.prodNo}</h5><br>
+						<c:if test="${product.proTranCode == null}">
+							<button id="purchase" style="background-color: black; color: white; width: 100%; height: 40px;">
+								<h6><span class="glyphicon glyphicon-shopping-cart"><b> 구매하기</b></span></h6>
+							</button>
+ 						</c:if>
+ 						<c:if test="${product.proTranCode != null}">	
+							<button id="request" style="background-color: black; color: white; width: 100%; height: 40px;">
+								<h6><b>품절 된 상품입니다.</b></h6>
+							</button>
+						</c:if>
 				</div>
+				
 			</div>			
 		</div>
-		
-<!-- 	    <div class="row"> -->
-<%-- 			<div class="col-xs-12 col-md-12"><h4><b>${product.prodName}</b></h4></div> --%>
-<!-- 		</div> -->
-		
-<!-- 		<div class="row"> -->
-<%-- 			<div class="col-xs-12 col-md-12"><h4>&#8361;${product.price}<small>&nbsp;배송비 제외</small></h4></div> --%>
-<!-- 		</div> -->
 		
 		<div class="row">
 			&nbsp;<p>
