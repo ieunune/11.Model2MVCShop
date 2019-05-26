@@ -36,14 +36,12 @@
 	label{
 		margin-top: 40px;
 	}
-      
+
 </style>
 
 <title>결제페이지</title>
 
-<script type="text/javascript" src="../javascript/calendar.js">
-	
-</script>
+<script type="text/javascript" src="../javascript/calendar.js"></script>
 
 <script type="text/javascript">
 	
@@ -155,6 +153,7 @@
 	  				<div>
 	  					<strong>수령받으실 주소</strong>&nbsp;
 	  					<input type="button" style="font-size: 12px;height: 30px; width: 90px; border: 1px solid #000000; background-color: #000000; color: #FFFFFF;" onclick="sample4_execDaumPostcode()" value="주소찾기">
+	  					<br/>
 	  					<input type="text" id="sample" name="divyAddr" style="width: 200px; height: 25px; border: 1px solid #000000;" maxLength="20" value="${user.addr}" />
 	  					<br/>
 	  				</div>
@@ -180,6 +179,8 @@
 					<img src="/images/uploadFiles/${product.fileName}" onerror="this.src='/images/uploadFiles/ImageTemp.png'" width="250px" height="250px"/>
 					<h4><b>${product.prodName}</b></h4>
 					<h4>&#8361;${product.price}<small>&nbsp;배송비 제외</small></h4>
+					<h4><b> 수량 : ${amount}</b></h4>
+					<h5>가격 : ${amount } * ${product.price}</h5>
 				</div>
 			</div>
 			

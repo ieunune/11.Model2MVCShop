@@ -152,7 +152,7 @@ $(function () {
 				</div>
 				<div class="col-xs-7 col-md-3">
 					<input type="text" class="form-control" id="amount" name="amount"
-						placeholder="¼ö·®" maxlength="3">
+						placeholder="${product.amount}" maxlength="3">
 				</div>
 				<div class="col-xs-1 col-md-1">°³</div>
 			</div>

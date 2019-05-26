@@ -31,7 +31,15 @@
 <script type="text/javascript">
 $(function () {
 	$("#purchase").on("click", function(){
-		$(self.location).attr("href","/purchase/addPurchaseView?prod_no="+$("#prodNo").text().trim());
+		
+		var amount = $("input").val();
+		
+		if ( ${ ! empty sessionScope.user}  ){
+			$(self.location).attr("href","/purchase/addPurchaseView?prod_no="+${product.prodNo}+"&amount="+amount);
+		} else {
+			alert("로그인 후 이용해주세요.");
+		}
+		
 	});
 	$("#commentGo").on("click",function(){
 		$("form").attr("action","/comment/addComment?prod_no="+${product.prodNo}).attr("method","POST").submit();
@@ -65,20 +73,25 @@ $(function () {
 	    <div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-7" align="center"><img src="/images/uploadFiles/${product.fileName}" onerror="this.src='/images/uploadFiles/ImageTemp.png'" width="600px" height="500px"/></div>
 			<div class="col-xs-12 col-sm-12 col-md-5">
+				
 				<h4><b>${product.prodName}</b></h4>
+				
 				<h4>&#8361;${product.price}<small>&nbsp;배송비 제외</small></h4>
-				<div style="vertical-align: bottom;">
-				<h5>모델번호: ${product.prodNo}</h5><br>
-<%-- 				<c:if test="${product.amount == 0}">				 --%>
-				<button id="purchase" style="background-color: black; color: white; width: 100%; height: 40px;">
-				<h6><span class="glyphicon glyphicon-shopping-cart"> <b> 구매하기</b></span></h6>
-				</button>
-<%-- 				</c:if> --%>
-<%-- 				<c:if test="${product.amount != 0}">				 --%>
-<!-- 				<button id="request" style="background-color: black; color: white; width: 100%; height: 40px;"> -->
-<!-- 				<h6><span class="glyphicon glyphicon-shopping-cart"> <b> 재입고요청</b></span></h6> -->
-<!-- 				</button> -->
-<%-- 				</c:if> --%>
+				
+				<div>				
+					<h5>모델번호: ${product.prodNo}</h5><br>
+					<h5>남은개수: ${product.amount}</h5><br>
+					<h5>수량 : <input type="text" name="amount" value="1" maxlength="3" style="width: 30px; text-align: right"></h5><br>
+					<c:if test="${product.amount != 0}">
+						<button id="purchase" style="background-color: black; color: white; width: 100%; height: 40px;">
+						<h6><span class="glyphicon glyphicon-shopping-cart"> <b> 구매하기</b></span></h6>
+						</button>
+					</c:if>
+					<c:if test="${product.amount == 0}">				
+						<button id="request" style="background-color: black; color: white; width: 100%; height: 40px;">
+						<h6><span class="glyphicon glyphicon-shopping-cart"> <b> 재입고요청</b></span></h6>
+						</button>
+					</c:if>
 				</div>
 			</div>			
 		</div>
@@ -122,28 +135,34 @@ $(function () {
 				
 		<c:forEach var="comment" items="${list}">
 		<div class="row">
-			<div class="col-sm-10 col-md-10" align="left">
+			<div class="col-sm-9 col-md-10" align="left">
 			<h4>
 				<b>${comment.userId}</b>&nbsp;
 				<small>${comment.inputDate}</small>&nbsp;
 			</h4>
 			<h5>${comment.reply}</h5>
 			</div>
-			<div class="col-sm-2 col-md-2" align="right">
-				<span class="glyphicon glyphicon-refresh"></span>
-				<span class="glyphicon glyphicon-remove"></span>
+			<div class="col-sm-3 col-md-2" align="right">
+				<button class="btn btn-default">
+					<span class="glyphicon glyphicon-thumbs-up">0</span>
+				</button>
+				<button class="btn btn-default">
+				<span class="glyphicon glyphicon-thumbs-down">0</span>
+				</button>
+<!-- 				<span class="glyphicon glyphicon-refresh"></span> -->
+<!-- 				<span class="glyphicon glyphicon-remove"></span> -->
 			</div>
 		</div>
 		</c:forEach>
 		<br>
 		
 		<div class="row">
-			<div class="col-sm-10 col-md-10" align="center">
+			<div class="col-sm-9 col-md-10" align="center">
 				<input type="text" name="reply" class="form-control" style="width: 100%; height: 40px" placeholder="댓글입력" />
 			</div>
-			<div class="col-sm-2 col-md-2" align="center">
+			<div class="col-sm-3 col-md-2" align="center">
 				<button id="commentGo" style="background-color: black; color: white; width: 100%; height: 40px;">
-				<h6>댓글달기</h6>
+				<h6><b>댓글달기</b></h6>
 				</button>
 			</div>
 		</div>
@@ -158,61 +177,6 @@ $(function () {
 	</div>
 
 <jsp:include page="/layout/bottom.jsp"></jsp:include>
-
-<%-- 				<c:set var="i" value="0"/> --%>
-<%-- 				<c:forEach var="comment" items="${list}">  --%>
-<%-- 					<c:set var="i" value="${i+1}"/> --%>
-<!-- 				<tr class="ct_list_pop"> -->
-<!-- 					<td align="center"> -->
-<%-- 					${comment.reply}</td> --%>
-<!-- 					<td></td> -->
-<!-- 					<td align="center"> -->
-<%-- 					${comment.inputDate}</td> --%>
-<!-- 					<td></td> -->
-<!-- 				</tr> -->
-<%-- 				</c:forEach> --%>
-<!-- 		</table> -->
-
-<!-- 		<hr/> -->
-									
-<!-- 		<input type="text" name="reply" id="reply" class="ct_input_g" style="width: 100%; height: 30px"/> -->
-								
-<!-- 		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px;"> -->
-<!-- 			<tr> -->
-<!-- 				<td width="17" height="23"><img src="/images/ct_btnbg01.gif" width="17" height="23" /></td> -->
-<!-- 				<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;"> -->
-<%-- <%-- 					<a href="/comment/addComment?prod_No=${product.prodNo}">댓글달기</a> --%>
-<!-- 					<a href="#" id="commentGo">댓글달기</a> -->
-<!-- 				</td> -->
-<!-- 				<td width="53%"></td> -->
-<!-- 				<td align="right"> -->
-
-<!-- 					<table border="0" cellspacing="0" cellpadding="0"> -->
-<!-- 						<tr> -->
-<%-- 							<c:if test="${product.proTranCode==null}">						 --%>
-<!-- 							<td width="17" height="23"><img src="/images/ct_btnbg01.gif" -->
-<!-- 								width="17" height="23" /></td> -->
-<!-- 							<td background="/images/ct_btnbg02.gif" class="ct_btn01" -->
-<!-- 								style="padding-top: 3px;"> -->
-<!-- 								구매</td> -->
-<!-- 							<td width="14" height="23"><img src="/images/ct_btnbg03.gif" -->
-<!-- 								width="14" height="23"></td> -->
-<!-- 							<td width="30"></td> -->
-<%-- 							</c:if> --%>
-<!-- 							<td width="17" height="23"><img src="/images/ct_btnbg01.gif" -->
-<!-- 								width="17" height="23" /></td> -->
-<!-- 							<td background="/images/ct_btnbg02.gif" class="ct_btn01" -->
-<!-- 								style="padding-top: 3px;"> -->
-<!-- 								이전</td> -->
-<!-- 							<td width="14" height="23"><img src="/images/ct_btnbg03.gif" -->
-<!-- 								width="14" height="23"></td> -->
-<!-- 						</tr> -->
-<!-- 					</table> -->
-
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!-- 		</table> -->
-<!-- 	</form> -->
 
 </body>
 </html>

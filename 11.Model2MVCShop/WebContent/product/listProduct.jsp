@@ -30,9 +30,15 @@
 
 <!--  CSS -->
 <style>
-    body { padding-top : 50px; }
-    h7 { color : red; }
-    .row.display-flex { display: flex; flex-wrap: wrap; }
+    body { 
+    	padding-top : 50px; 
+    }
+    h7 { 
+    	color : red; 
+    }
+    .row.display-flex { 
+    	display: flex; flex-wrap: wrap; 
+    }
 	.thumbnail {
 		width: auto;
 		height: 250px;
@@ -225,7 +231,7 @@
    			<div class="caption" align="center">
         			<h3><b>${product.prodName}</b></h3>
         			<p>${product.price}&nbsp;원</p>
-        			<c:if test="${product.proTranCode==null}">
+        			<c:if test="${product.proTranCode==null && product.amount > 0}">
 						판매중<p>
 					</c:if>
 					<c:if test="${product.proTranCode=='000'}">

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,9 +56,11 @@ public class PurchaseController {
 	
 	
 	@RequestMapping("/addPurchaseView")
-	public String addPurchaseView() throws Exception {
+	public String addPurchaseView(@RequestParam("amount") int amount, Model model) throws Exception {
 
 		System.out.println("/purchaseView");
+		
+		model.addAttribute("amount", amount);
 		
 		return "forward:/purchase/addPurchaseView.jsp";
 	}

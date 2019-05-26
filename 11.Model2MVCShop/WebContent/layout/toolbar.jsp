@@ -87,7 +87,12 @@
 	             </ul>
 	             
 	             <ul class="nav navbar-nav navbar-right">
-	                <li><a href="#">로그아웃</a></li>
+	             	<c:if test="${ empty sessionScope.user}">
+	                	<li><a href="#">비회원</a></li>
+	                </c:if>
+	                <c:if test="${ !empty sessionScope.user}">
+	                	<li><a href="#">로그아웃</a></li>
+	                </c:if>
 	            </ul>
 		</div>
 		<!-- dropdown hover END -->	       
@@ -106,7 +111,11 @@
 		 	$("a:contains('로그아웃')").on("click" , function() {
 				$(self.location).attr("href","/user/logout");
 				//self.location = "/user/logout"
-			}); 
+			});
+		 	$("a:contains('비회원')").on("click" , function() {
+				$(self.location).attr("href","/user/loginView.jsp");
+				//self.location = "/user/logout"
+			});
 		 });
 		
 		//============= 회원정보조회 Event  처리 =============	

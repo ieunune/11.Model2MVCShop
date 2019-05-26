@@ -39,7 +39,7 @@
 	<style>
 		.navbar.navbar-default.navbar-fixed-top{
 			border-width: 0px;    		
-   			box-shadow: 0px 0px;
+    		box-shadow: 0px 0px; 
    			background-color: rgba(0,0,0,0.0);			 
    			background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
 		}
@@ -131,7 +131,7 @@
 		
         <div class="container">
         
-        	<a class="navbar-brand" href="/index.jsp">Eunwoo Shop</a>
+        	<a class="navbar-brand" href="/index.jsp" style="color: white;">Eunwoo Shop</a>
 			
 			<!-- toolBar Button Start //////////////////////// -->
 			<div class="navbar-header">
@@ -152,8 +152,8 @@
 <!-- 	                 </li> -->
 	           	</ul>
 	             <ul class="nav navbar-nav navbar-right">
-	                 <li><a href="#">회원가입</a></li>
-	                 <li><a href="#">로 그 인</a></li>
+	                 <li><a href="#" style="color: white;">회원가입</a></li>
+	                 <li><a href="#" style="color: white;">로 그 인</a></li>
 	           	</ul>
 	       	</div>
    		
