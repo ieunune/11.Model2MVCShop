@@ -27,10 +27,9 @@
 	 </insert>
 	
 	<select id="getProduct" parameterType="int" resultMap="productSelectMap">
-		SELECT p.prod_No , p.prod_name , p.prod_detail , p.manufacture_day , p.price, p.image_file, p.reg_date, p.prod_amount, t.tran_Status_Code 
-		FROM product p, transaction t
-		WHERE p.prod_no = t.prod_no(+)
-		AND p.prod_No = #{value}
+		SELECT p.prod_No , p.prod_name , p.prod_detail , p.manufacture_day , p.price, p.image_file, p.reg_date, p.prod_amount
+		FROM product p
+		WHERE p.prod_No = #{value}
 	</select>
 	
 	<update id="updateProduct" parameterType="product">
@@ -48,9 +47,8 @@
 	<select id="getProductList" parameterType="map" resultMap="productSelectMap">
 		SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT p.prod_no, p.PROD_NAME, p.PROD_DETAIL, p.MANUFACTURE_DAY, p.PRICE, p.IMAGE_FILE, p.REG_DATE, p.prod_amount, t.TRAN_STATUS_CODE
-                						FROM product p, transaction t        
-                						WHERE p.prod_no = t.prod_no(+)
+	  					FROM		(	SELECT p.prod_no, p.PROD_NAME, p.PROD_DETAIL, p.MANUFACTURE_DAY, p.PRICE, p.IMAGE_FILE, p.REG_DATE, p.prod_amount
+                						FROM product p     
                 						<if test="searchCondition != null">
 											<if test="searchCondition == 0 and searchKeyword !='' ">
 										 		AND p.prod_no like '%'||#{searchKeyword}||'%'
@@ -77,9 +75,8 @@
 	
 	<select  id="getTotalCount"  parameterType="search"	 resultType="int">
 	  	SELECT count(*)
-		FROM ( SELECT p.prod_no, p.PROD_NAME, p.PROD_DETAIL, p.MANUFACTURE_DAY, p.PRICE, p.IMAGE_FILE, p.REG_DATE, p.PROD_AMOUNT, t.TRAN_STATUS_CODE
-               FROM product p, transaction t   
-               WHERE p.prod_no = t.prod_no(+)
+		FROM ( SELECT p.prod_no, p.PROD_NAME, p.PROD_DETAIL, p.MANUFACTURE_DAY, p.PRICE, p.IMAGE_FILE, p.REG_DATE, p.PROD_AMOUNT
+               FROM product p
 				<if test="searchCondition != null">
 					<if test="searchCondition == 0 and searchKeyword !='' ">
 						AND p.prod_no like '%'||#{searchKeyword}||'%'
@@ -93,4 +90,10 @@
 				</if> 
 		ORDER BY p.prod_no) countTable											
 	 </select>
+	 
+	 <update id="updateProdAmount" parameterType="product">
+	 	UPDATE product
+	 	SET prod_amount = prod_amount - #{amount}
+	 	WHERE prod_no = #{prodNo}
+	 </update>
 </mapper>

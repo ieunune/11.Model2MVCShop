@@ -77,4 +77,9 @@ public class ProductServiceImpl implements ProductService{
 		return resultList;
 	}
 
+	@Override
+	public void updateProdAmount(Product product) throws Exception {
+		productDao.updateAmountProduct(product);
+	}
+
 } // 클래스의 끝

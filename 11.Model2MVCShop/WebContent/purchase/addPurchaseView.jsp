@@ -180,6 +180,7 @@
 					<h4><b>${product.prodName}</b></h4>
 					<h4>&#8361;${product.price}<small>&nbsp;배송비 제외</small></h4>
 					<h4><b> 수량 : ${amount}</b></h4>
+					<input type="hidden" name="amount" value="${amount}"/>
 					<h5>가격 : ${amount } * ${product.price}</h5>
 				</div>
 			</div>

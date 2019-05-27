@@ -13,7 +13,16 @@ public class Purchase {
 	private String receiverPhone;
 	private String tranCode;
 	private int tranNo;
+	private int amount;
 	
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
 	public Purchase(){
 	}
 	

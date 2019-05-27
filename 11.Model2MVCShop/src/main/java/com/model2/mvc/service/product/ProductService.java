@@ -19,4 +19,6 @@ public interface ProductService {
 	public void updateProduct(Product product) throws Exception;
 
 	public List<String> getProductSearchList(Map<String, Object> searchMap) throws Exception;
+	
+	public void updateProdAmount(Product product) throws Exception;
 }
