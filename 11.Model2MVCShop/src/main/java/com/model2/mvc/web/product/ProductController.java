@@ -30,6 +30,7 @@ import com.model2.mvc.service.comment.impl.CommentServiceImpl;
 import com.model2.mvc.service.domain.Comment;
 import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.product.ProductService;
+import com.model2.mvc.service.purchase.PurchaseService;
 
 @Controller
 @RequestMapping("/product/*")
@@ -223,4 +224,5 @@ public class ProductController {
 		
 		return "forward:/product/listProduct.jsp";
 	}
+	
 }

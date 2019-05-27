@@ -30,19 +30,40 @@
 
 <script type="text/javascript">
 $(function () {
+	
+	$("#request").on("click",function(){
+		alert("준비중인 기능입니다.\n이용에 불편을드려 죄송합니다.");	
+	});
+	
 	$("#purchase").on("click", function(){
 		
 		var amount = $("input").val();
 		
+		//alert(${product.amount});
+		//alert(amount);
+		
 		if ( ${ ! empty sessionScope.user}  ){
-			$(self.location).attr("href","/purchase/addPurchaseView?prod_no="+${product.prodNo}+"&amount="+amount);
+			if(${product.amount} >= amount){
+				$(self.location).attr("href","/purchase/addPurchaseView?prod_no="+${product.prodNo}+"&amount="+amount);
+			} else {
+				alert("판매하는 개수보다 많습니다.\n수량을 확인해주세요.")
+			}
 		} else {
 			alert("로그인 후 이용해주세요.");
 		}
 		
 	});
+	
 	$("#commentGo").on("click",function(){
-		$("form").attr("action","/comment/addComment?prod_no="+${product.prodNo}).attr("method","POST").submit();
+		
+		if ( ${ ! empty sessionScope.user}  ){
+			$("form").attr("action","/comment/addComment?prod_no="+${product.prodNo}).attr("method","POST").submit();
+		} else {
+			alert("비회원은 댓글을 달 수 없습니다.\n로그인 후 이용해 주시길 바랍니다.");
+			
+			return false;
+		}
+
 	});
 	
 //	퀵메뉴바
@@ -62,9 +83,7 @@ $(function () {
 	
 	<div class="container">		
 		<div class="page-header text-info">
-			<a href="javascript:self.location=document.referrer;">
-			<span class="glyphicon glyphicon-arrow-left">&nbsp;뒤로</span>
-			</a>
+			
 			<c:if test="${param.menu == manage}">
 			<h5 class="text-muted">상품 정보를 <strong class="text-danger">최신정보로 관리</strong>해 주세요.</h5>
 			</c:if>	
@@ -82,12 +101,12 @@ $(function () {
 					<h5>모델번호: ${product.prodNo}</h5><br>
 					<h5>남은개수: ${product.amount}</h5><br>
 					<h5>수량 : <input type="text" name="amount" value="1" maxlength="3" style="width: 30px; text-align: right"></h5><br>
-					<c:if test="${product.amount != 0}">
+					<c:if test="${product.amount > 0 }">
 						<button id="purchase" style="background-color: black; color: white; width: 100%; height: 40px;">
 						<h6><span class="glyphicon glyphicon-shopping-cart"> <b> 구매하기</b></span></h6>
 						</button>
 					</c:if>
-					<c:if test="${product.amount == 0}">				
+					<c:if test="${product.amount <= 0}">				
 						<button id="request" style="background-color: black; color: white; width: 100%; height: 40px;">
 						<h6><span class="glyphicon glyphicon-shopping-cart"> <b> 재입고요청</b></span></h6>
 						</button>

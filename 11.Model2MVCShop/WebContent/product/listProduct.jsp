@@ -136,12 +136,7 @@
 	<div class="container">
 		
 		<div class="page-header text-info">
-			<c:if test="${param.menu =='manage'}">
-			<h3>상품 관리</h3>
-			</c:if>
-			<c:if test="${param.menu =='search'}">
-			<h3>상품 목록 조회</h3>
-			</c:if>		
+			<h3>상품 목록 조회</h3>	
 	    </div>
 	    
 	    <div class="row">
@@ -231,23 +226,12 @@
    			<div class="caption" align="center">
         			<h3><b>${product.prodName}</b></h3>
         			<p>${product.price}&nbsp;원</p>
-        			<c:if test="${product.proTranCode==null && product.amount > 0}">
-						판매중<p>
-					</c:if>
-					<c:if test="${product.proTranCode=='000'}">
-						구매완료<p>
-					<c:if test="${param.menu=='manage'}">
-						<a id="tranState">배송하기
-							<input type="hidden" id="prodNo" value="${product.prodNo}"/>
-						</a> 
-						</c:if>
-					</c:if>
-					<c:if test="${product.proTranCode=='001'}">
-						배송중<p>
-					</c:if>
-					<c:if test="${product.proTranCode=='002'}">
-						배송완료<p>
-					</c:if>
+        			<c:if test="${product.amount != 0}">
+        			<p>${product.amount}&nbsp;개</p>
+        			</c:if>
+        			<c:if test="${product.amount == 0}">
+        			<p>품절상품</p>
+        			</c:if>
 					<div style="color: white;">
 						&nbsp;<p>
 						&nbsp;<p>

@@ -28,7 +28,7 @@ import com.model2.mvc.service.purchase.impl.PurchaseServiceImpl;
 import com.model2.mvc.service.user.UserService;
 
 @Controller
-@RequestMapping("/purchase/*")
+@RequestMapping("/purchase")
 public class PurchaseController {
 
 
@@ -77,6 +77,7 @@ public class PurchaseController {
 		product = productService.getProduct(product.getProdNo());
 		System.out.println(" :: "+ product);
 		
+		product.setAmount(purchase.getAmount());
 		System.out.println(" :: " + purchase);
 		
 		purchase.setBuyer(user);
@@ -87,7 +88,7 @@ public class PurchaseController {
 		System.out.println(" :: " + purchase);
 		
 		purchaseService.addPurchase(purchase);
-		
+		productService.updateProdAmount(product);
 		model.addAttribute("purchase", purchase);
 		
 		return "forward:/purchase/addPurchase.jsp";

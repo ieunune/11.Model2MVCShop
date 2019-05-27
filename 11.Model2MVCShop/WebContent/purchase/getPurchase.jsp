@@ -113,13 +113,15 @@ $(function () {
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">${purchase.divyRequest}</td>
 	</tr>
+
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
 	</tr>
+	
 	<tr>
-		<td width="104" class="ct_write">배송희망일</td>
+		<td width="104" class="ct_write">구매개수</td>
 		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${purchase.divyDate}</td>
+		<td class="ct_write01">${purchase.amount}</td>
 	</tr>
 
 	<tr>
@@ -129,7 +131,7 @@ $(function () {
 	<tr>
 		<td width="104" class="ct_write">주문일</td>
 		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${purchase.orderDate}</td>
+		<td class="ct_write01">${purchase.divyDate}</td>
 	</tr>
 
 	<tr>

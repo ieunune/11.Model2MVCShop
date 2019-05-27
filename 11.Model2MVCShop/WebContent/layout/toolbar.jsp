@@ -144,7 +144,7 @@
 		});
 		
 		$("a:contains('판매상품관리')").on("click" , function(){			
-			$(self.location).attr("href","/product/listProduct?menu=manage");
+			$(self.location).attr("href","/purchase/purchaseManage.jsp;");
 		});
 		
 		$("a:contains('상 품 검 색')").on("click" , function(){			

@@ -37,4 +37,6 @@ public interface ProductDao {
 	} */
 
 	public List<String> getProductSearchList(Map<String, Object> searchMap);
+
+	public void updateAmountProduct(Product product) throws SQLException;
 }

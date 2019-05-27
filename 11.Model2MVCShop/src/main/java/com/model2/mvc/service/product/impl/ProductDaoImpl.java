@@ -90,4 +90,11 @@ public class ProductDaoImpl implements ProductDao{
 		return list;
 	}
 
+	@Override
+	public void updateAmountProduct(Product product) throws SQLException {
+		System.out.println("updateAmountProduct : " + product);
+		sqlSession.update("ProductMapper.updateProdAmount", product);
+		
+	}
+
 }
