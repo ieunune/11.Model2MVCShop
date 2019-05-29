@@ -67,6 +67,54 @@
 		.jumbotron{
 			background-color: #FFFFFF;
 		}
+		.thumbnail {
+		width: auto;
+		height: 250px;
+		}
+		.thumbnail img{
+		position : relative;
+		width : auto;
+		height : 242px;
+		object-fit: cover;
+		}
+		.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
 	</style>
    	
    	<!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -95,6 +143,15 @@
 			});
 		});
 		
+// 		$( function(){
+// 			$(".glyphicon.glyphicon-menu-hamburger").on("click", function(){
+// 				document.getElementById("mySidenav").style.width = "250px";
+// 			});
+// 		});
+		
+// 		function closeNav() {
+// 			  document.getElementById("mySidenav").style.width = "0";
+// 		}
 // 		$(function(){
 						
 // 			$("#searchKeyword").on("keyup", function(){
@@ -125,7 +182,14 @@
 </head>
 
 <body>
-
+	
+<!-- 	<div id="mySidenav" class="sidenav"> -->
+<!--   		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+<!--   		<a href="#">About</a> -->
+<!--   		<a href="#">Services</a> -->
+<!--   		<a href="#">Clients</a> -->
+<!--   		<a href="#">Contact</a> -->
+<!-- 	</div> -->
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<div class="navbar navbar-default navbar-fixed-top">
 		
@@ -152,8 +216,15 @@
 <!-- 	                 </li> -->
 	           	</ul>
 	             <ul class="nav navbar-nav navbar-right">
+<!-- 	             	 <li><span class="glyphicon glyphicon-menu-hamburger" style="background-color: white;"></span></li> -->
 	                 <li><a href="#" style="color: white;">회원가입</a></li>
 	                 <li><a href="#" style="color: white;">로 그 인</a></li>
+<!-- 	                 <li><a href="#" style="color: white;"> -->
+<!-- 	                 <span style="font-size:23px;cursor:pointer;background-color: #000000;" class="icon-bar"></span> -->
+<!-- 	                 <span style="font-size:23px;cursor:pointer" class="icon-bar"></span> -->
+<!-- 	                 <span style="font-size:23px;cursor:pointer" class="icon-bar"></span> -->
+<!-- 	                 </a> -->
+<!-- 	                 </li> -->
 	           	</ul>
 	       	</div>
    		
@@ -186,12 +257,12 @@
 					<img src="/images/main/Main5.jpg">
 				</div>
 			</div>
-			<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"> 
-				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev" > 
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="margin-left: 230px; margin-right: 250px;"></span>
 				<span class="sr-only">Previous</span>
 			</a> 
 			<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"> 
-				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="margin-right: 230px; margin-left: 250px;"></span>
 				<span class="sr-only">Next</span>
 			</a>
 		</div>
@@ -256,7 +327,12 @@
 			</div>
 			<!--  Menu 구성 end /////////////////////////////////////-->   
 
-	 	 	<!--  Main start /////////////////////////////////////-->   		
+	 	 	<!--  Main start /////////////////////////////////////-->
+	 	 	 
+	 	 	<div class="col-md-12">
+				
+	 	 	</div>
+	 	 			
 	 	 	<div class="col-md-12">
 				<div class="jumbotron">
 					<div class="text-center">
