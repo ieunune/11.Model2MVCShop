@@ -155,17 +155,21 @@ public class PurchaseController {
 	
 	@RequestMapping("/updateTranCodeByTranNo")
 	public String updateTranCodeByTranNo(@RequestParam("tranNo") int tranNo,
+										 @RequestParam("tranCode") String tranCode,
 										 Model model , HttpServletRequest request,HttpSession session) throws Exception{
 		
 		System.out.println("/updatePurchase");
 		
-		purchaseService.updateTranCodeByTranNo(tranNo);
-		
-		return "forward:/purchase/listPurchase";
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("tranNo", tranNo);
+		map.put("tranCode", tranCode);
+		purchaseService.updateTranCodeByTranNo(map);
+		// http://localhost:8080/purchase/listPurchase?tranStateCode=000
+		return "forward:/purchase/listPurchase?tranCode=000";
 	}
 		
 	@RequestMapping("/listPurchase")
-	public String listPurchase( @ModelAttribute("search") Search search , Model model , HttpServletRequest request, HttpSession session) throws Exception{
+	public String listPurchase( @ModelAttribute("search") Search search, Model model , HttpServletRequest request, HttpSession session) throws Exception{
 		
 		System.out.println("/listPurchase");
 		
@@ -174,27 +178,85 @@ public class PurchaseController {
 		}
 		search.setPageSize(pageSize);
 		
-		System.out.println(search + " :: ");
-		
+		System.out.println("/listPurchase Search :: " + search + " :: ");
+		if(request.getParameter("tranStateCode") != null) {
+			System.out.println("1");
+			String tranStateCode = request.getParameter("tranStateCode");
+			if(tranStateCode.equals("000")) {
+				System.out.println("2");
+				search.setTranStateCode(tranStateCode);
+			} else if(tranStateCode.equals("001")) {
+				System.out.println("3");
+				search.setTranStateCode(tranStateCode);
+			} else if(tranStateCode.equals("002")) {
+				System.out.println("4");
+				search.setTranStateCode(tranStateCode);
+			}
+		}
+
 		User user = (User)session.getAttribute("user");
 		System.out.println(" listPurchase User :: " + user);
-		Map<String , Object> map=purchaseService.getPurchaseList(search, user.getUserId());
-		System.out.println(" 111111111 ");
+		
+		Map<String , Object> map=purchaseService.getPurchaseList(search, user);
+		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println(" 222222222 ");
+		
 		
 		System.out.println("==================== DEBUG START =======================");
 		System.out.println(" :: resultPage :: " + resultPage + " :: ");
 		System.out.println(" :: search :: " + search + " :: ");
 		System.out.println(" :: list :: " + map.get("list") + " :: ");
-		System.out.println("==================== DEBUG START =======================");
+		System.out.println("==================== DEBUG END =======================");
 		// Model 과 View 연결
 		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
+		if(request.getParameter("tranCode") != null) {
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			if(request.getParameter("tranCode").equals("000")) {
+				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+				return "redirect:/purchase/listPurchase?tranStateCode=000";
+			}
+		}
+		if(user.getUserId().equals("admin")) {
+			return "forward:/purchase/purchaseManage.jsp";
+		}
 		return "forward:/purchase/listPurchase.jsp";
 	}
+	
+//	@RequestMapping("/purchaseManagelist")
+//	public String purchaseManagelist( @ModelAttribute("search") Search search , Model model , HttpServletRequest request, HttpSession session) throws Exception{
+//		
+//		System.out.println("/listPurchase");
+//		
+//		if(search.getCurrentPage() == 0 ){
+//			search.setCurrentPage(1);
+//		}
+//		search.setPageSize(pageSize);
+//		
+//		System.out.println(search + " :: ");
+//		
+//		User user = (User)session.getAttribute("user");
+//		System.out.println(" listPurchase User :: " + user);
+//		
+//		Map<String , Object> map=purchaseService.getPurchaseList(search);
+//		
+//		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+//		
+//		System.out.println("==================== DEBUG START =======================");
+//		System.out.println(" :: resultPage :: " + resultPage + " :: ");
+//		System.out.println(" :: search :: " + search + " :: ");
+//		System.out.println(" :: list :: " + map.get("list") + " :: ");
+//		System.out.println("==================== DEBUG START =======================");
+//		// Model 과 View 연결
+//		
+//		model.addAttribute("list", map.get("list"));
+//		model.addAttribute("resultPage", resultPage);
+//		model.addAttribute("search", search);
+//		
+//		return "forward:/purchase/listPurchase.jsp";
+//	}
 
 }

@@ -15,12 +15,21 @@ public class Search {
 	//==> ÂüÁ¶
 	private int endRowNum;
 	private int startRowNum;
-	
+	private String tranStateCode;
+
 	///Constructor
 	public Search() {
 	}
 	
 	///Method
+	public String getTranStateCode() {
+		return tranStateCode;
+	}
+
+	public void setTranStateCode(String tranStateCode) {
+		this.tranStateCode = tranStateCode;
+	}
+	
 	public int getPageSize() {
 		return pageSize;
 	}
@@ -60,9 +69,10 @@ public class Search {
 
 	@Override
 	public String toString() {
-		return "Search [currentPage=" + currentPage + ", searchCondition="
-				+ searchCondition + ", searchKeyword=" + searchKeyword
-				+ ", pageSize=" + pageSize + ", endRowNum=" + endRowNum
-				+ ", startRowNum=" + startRowNum + "]";
+		return "Search [currentPage=" + currentPage + ", searchCondition=" + searchCondition + ", searchKeyword="
+				+ searchKeyword + ", pageSize=" + pageSize + ", endRowNum=" + endRowNum + ", startRowNum=" + startRowNum
+				+ ", tranStateCode=" + tranStateCode + "]";
 	}
+
+
 }

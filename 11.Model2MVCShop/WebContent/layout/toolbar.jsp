@@ -58,6 +58,7 @@
 		                     <ul class="dropdown-menu">
 		                         <li><a href="#">판매상품등록</a></li>
 		                         <li><a href="#">판매상품관리</a></li>
+		                         <li><a href="#">상품주문관리</a></li>
 		                         <li class="divider"></li>
 		                         <li><a href="#">etc..</a></li>
 		                     </ul>
@@ -144,7 +145,11 @@
 		});
 		
 		$("a:contains('판매상품관리')").on("click" , function(){			
-			$(self.location).attr("href","/purchase/purchaseManage.jsp;");
+			$(self.location).attr("href","/product/listProduct?menu=manage");
+		});
+		
+		$("a:contains('상품주문관리')").on("click" , function(){			
+			$(self.location).attr("href","/purchase/listPurchase");
 		});
 		
 		$("a:contains('상 품 검 색')").on("click" , function(){			

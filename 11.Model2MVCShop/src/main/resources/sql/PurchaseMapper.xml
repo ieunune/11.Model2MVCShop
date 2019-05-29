@@ -75,10 +75,10 @@
 		WHERE prod_no = #{value}
 	</update>
 	
-	<update id="updateTranCodeByTranNo" parameterType="int">
+	<update id="updateTranCodeByTranNo" parameterType="map">
 		UPDATE transaction
-		SET tran_status_code = '002'
-		WHERE tran_no = #{value}
+		SET tran_status_code = #{tranCode}
+		WHERE tran_no = #{tranNo}
 	</update>
 	
 	<select id="getPurchaseList" parameterType="hashmap" resultMap="purchaseSelectMap">
@@ -87,30 +87,27 @@
 	  					FROM		(	SELECT 
 										*
 										FROM transaction
+										<if test="buyerId neq 'admin'">
 										WHERE
 											buyer_id = #{buyerId}
+										</if>
+										<if test="tranStateCode != null">
+										WHERE
+											tran_status_code = '${tranStateCode}'
+										</if>
 										ORDER BY tran_no ) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	</select>
 	
-	<select id="getPurchaseListAll" parameterType="search" resultMap="purchaseSelectMap">
-		SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT 
-										*
-										FROM transaction
-										ORDER BY tran_no ) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
-	</select>
-	
-	<select  id="getTotalCount"  parameterType="string"	 resultType="int">
+	<select  id="getTotalCount"  parameterType="user"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT *
-						FROM transaction
-						WHERE
-							buyer_id = #{buyerId}
+						FROM transaction												
+							<if test="userId neq 'admin'">
+							WHERE
+							buyer_id = #{userId}
+							</if>
 						 ) countTable						
 	 </select>
 </mapper>

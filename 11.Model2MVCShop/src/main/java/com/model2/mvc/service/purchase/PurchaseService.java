@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Purchase;
+import com.model2.mvc.service.domain.User;
 
 public interface PurchaseService {
 
@@ -15,7 +16,7 @@ public interface PurchaseService {
 	
 	public void getPurchase2(int ProdNo) throws Exception;
 	
-	public HashMap<String,Object> getPurchaseList(Search search,String buyerId) throws Exception;
+	public HashMap<String,Object> getPurchaseList(Search search,User user) throws Exception;
 	
 	public HashMap<String,Object> getSaleList(Search search) throws Exception;
 	
@@ -23,6 +24,6 @@ public interface PurchaseService {
 	
 	public void updateTranCode(int prodNo) throws Exception;
 
-	public void updateTranCodeByTranNo(int tranNo);
+	public void updateTranCodeByTranNo(Map<String, Object> map);
 	
 }

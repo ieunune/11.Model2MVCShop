@@ -51,10 +51,10 @@ body {
 		
 		//$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 		
-		$("#tranState").on("click",function(){
+		$("#state").on("click",function(){
 			//alert($(this).children("#tranNo").val())
 			//alert($(this).children("#userId").val())
-			$(self.location).attr("href","/purchase/updateTranCodeByTranNo?tranNo="+$(this).children("#tranNo").val()+"&userId="+$(this).children("#userId").val());
+			$(self.location).attr("href","/purchase/updateTranCodeByTranNo?tranNo="+$(this).children("#tranNo").val()+"&tranCode="+$(this).children("#tranCode").val());
 			alert('수령완료처리 되었습니다.')
 		});
 		
@@ -117,14 +117,15 @@ body {
 					${purchase.divyAddr}</td>
 					
 					<td align="left">
-						<input type="hidden" id="tranNo" value="${purchase.tranNo}">
-						<input type="hidden" id="userId" value="${user.userId}">
 						<c:if test="${purchase.tranCode=='000'}">
 							구매완료	
 						</c:if>
 						<c:if test="${purchase.tranCode=='001'}">
 							배송중
 							<a id="state">수령하기
+								<input type="hidden" id="tranCode" value="002">
+								<input type="hidden" id="tranNo" value="${purchase.tranNo}">
+								<input type="hidden" id="userId" value="${user.userId}">
 							</a>
 						</c:if>
 						<c:if test="${purchase.tranCode=='002'}">

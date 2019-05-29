@@ -97,13 +97,6 @@
 			});
 		});
 		
-		$("#tranState").on("click", function(){
-			
-			//alert($(this).children("input").val()+" "+$("#menu").val())
-			$(self.location).attr("href","/purchase/updateTranCode?prodNo="+$(this).children("input").val()+"&menu="+$("#menu").val());
-			alert('배송이 완료되었습니다.');
-		});
-		
 		$(".thumbnail").on("click", function(){
 			
 			self.location ="/product/getProduct?prodNo="+$(this).children("input").val()+"&menu="+$("#menu").val();
@@ -214,13 +207,13 @@
   			<c:if test="${product.proTranCode==null}">
     		<a href="#" class="thumbnail">
     			<input type="hidden" id="prodNo" value="${product.prodNo}">
-      			<img src="/images/uploadFiles/${product.fileName}" onerror="this.src='/images/uploadFiles/ImageTemp.png'"/>
+      			<img class="rounded-circle" src="/images/uploadFiles/${product.fileName}" onerror="this.src='/images/uploadFiles/ImageTemp.png'"/>
    			</a>
     		</c:if>
     		<c:if test="${product.proTranCode!=null}">
     		<div class="thumbnail">
     			<input type="hidden" id="prodNo" value="${product.prodNo}">
-      			<img src="/images/uploadFiles/${product.fileName}" onerror="this.src='/images/uploadFiles/ImageTemp.png'"/>
+      			<img class="rounded-circle" src="/images/uploadFiles/${product.fileName}" onerror="this.src='/images/uploadFiles/ImageTemp.png'"/>
    			</div>
     		</c:if>
    			<div class="caption" align="center">

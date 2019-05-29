@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Purchase;
+import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.purchase.PurchaseDao;
 import com.model2.mvc.service.purchase.PurchaseService;
 
@@ -44,11 +45,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
-	public HashMap<String, Object> getPurchaseList(Search search, String buyerId) throws Exception {
+	public HashMap<String, Object> getPurchaseList(Search search, User user) throws Exception {
 		
-		int totalCount = purchaseDao.getTotalCount(buyerId);
+		System.out.println("1");
+		int totalCount = purchaseDao.getTotalCount(user);
 		
-		HashMap<String, Object> map = purchaseDao.getPurchaseList(search, buyerId);
+		HashMap<String, Object> map = purchaseDao.getPurchaseList(search, user);
 		map.put("list", map.get("list"));
 		map.put("totalCount", new Integer(totalCount));
 		
@@ -70,8 +72,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 		purchaseDao.updateTranCode(prodNo);
 	}
 	@Override
-	public void updateTranCodeByTranNo(int tranNo) {
-		purchaseDao.updateTranCodeByTranNo(tranNo);
+	public void updateTranCodeByTranNo(Map<String, Object> map) {
+		purchaseDao.updateTranCodeByTranNo(map);
 	}
 
 }

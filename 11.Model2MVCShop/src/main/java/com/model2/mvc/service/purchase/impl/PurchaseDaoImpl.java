@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.domain.Purchase;
+import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.purchase.PurchaseDao;
 
 //==> 회원관리 DAO CRUD 구현
@@ -52,14 +53,20 @@ public class PurchaseDaoImpl implements PurchaseDao{
 	}
 
 	@Override
-	public HashMap<String, Object> getPurchaseList(Search search,String buyerId) throws Exception {
+	public HashMap<String, Object> getPurchaseList(Search search,User user) throws Exception {
 		
+		System.out.println("2");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("startRowNum",search.getStartRowNum());
 		map.put("endRowNum",search.getEndRowNum());
-		map.put("buyerId",buyerId);
+		map.put("buyerId",user.getUserId());
 		
-		System.out.println(map.get("buyerId").equals("user15")?"YES":"NO");
+		map.put("tranStateCode",search.getTranStateCode());
+		
+		System.out.println("START ROW NUM " + map.get("startRowNum"));
+		System.out.println("END ROW NUM " + map.get("endRowNum"));
+		System.out.println("BUYER ID " + map.get("buyerId"));
+		System.out.println(map.get("buyerId").equals("admin")?"YES":"NO");
 		
 		List<Purchase> list = sqlSession.selectList("PurchaseMapper.getPurchaseList", map);
 		map.put("list", list);
@@ -78,17 +85,32 @@ public class PurchaseDaoImpl implements PurchaseDao{
 	}
 
 	@Override
-	public int getTotalCount(String buyerId) throws Exception {
-		return sqlSession.selectOne("PurchaseMapper.getTotalCount",buyerId);
+	public int getTotalCount(User user) throws Exception {
+		System.out.println("GET TOTAL COUNT BUYER ID : " + user);
+		return sqlSession.selectOne("PurchaseMapper.getTotalCount",user);
 	}
 
 	@Override
-	public void updateTranCodeByTranNo(int tranNo) {
+	public void updateTranCodeByTranNo(Map<String, Object> map) {
 		
-		System.out.println(" @@@@@@@ " + tranNo);
+		System.out.println(" @@@@@@@ " + map);
 		
-		sqlSession.update("PurchaseMapper.updateTranCodeByTranNo", tranNo);
+		sqlSession.update("PurchaseMapper.updateTranCodeByTranNo", map);
 	}
+
+//	@Override
+//	public HashMap<String, Object> getPurchaseManageList(Search search) {
+//		
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		map.put("startRowNum",search.getStartRowNum());
+//		map.put("endRowNum",search.getEndRowNum());
+//		
+//		System.out.println(map.get("buyerId").equals("user15")?"YES":"NO");
+//		
+//		List<Purchase> list = sqlSession.selectList("PurchaseMapper.getPurchaseManageList", map);
+//		map.put("list", list);
+//		return null;
+//	}
 
 	
 }
