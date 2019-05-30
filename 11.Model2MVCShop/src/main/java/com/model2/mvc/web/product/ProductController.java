@@ -194,6 +194,8 @@ public class ProductController {
 			search.setPageSize(Integer.parseInt(repageSize));
 		}
 		
+		System.out.println("1");
+		
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("search",search);
 		

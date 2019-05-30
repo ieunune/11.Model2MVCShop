@@ -32,7 +32,11 @@ body {
 <script type="text/javascript">
 	function fncGetUserList(currentPage) {
 		$("#currentPage").val(currentPage)
-		$("form").attr("method" , "POST").attr("action" , "/purchase/listPurchase").submit();
+		if( ${param.tranStateCode != null}){
+			$("form").attr("method" , "POST").attr("action" , "/purchase/listPurchase?tranStateCode=${param.tranStateCode}").submit();
+		} else {
+			$("form").attr("method" , "POST").attr("action" , "/purchase/listPurchase").submit();
+		}
 	}
 	
 	$(function(){
@@ -56,6 +60,10 @@ body {
 			//alert($(this).children("#userId").val())
 			$(self.location).attr("href","/purchase/updateTranCodeByTranNo?tranNo="+$(this).children("#tranNo").val()+"&userId="+$(this).children("#userId").val());
 			alert('수령완료처리 되었습니다.')
+		});
+		
+		$("button:contains('전체보기')").on("click", function(){
+			$(self.location).attr("href","/purchase/listPurchase");
 		});
 		
 		$("button:contains('구매완료')").on("click", function(){
@@ -101,6 +109,7 @@ body {
 		
 		<div class="row">
 			<div class="col-md-6 text-left">
+				<button type="button" class="btn btn-default" > 전체보기</button>
 				<button type="button" class="btn btn-default" > 구매완료</button>
 				<button type="button" class="btn btn-default" > 배송중</button>
 				<button type="button" class="btn btn-default" > 거래완료</button>
@@ -111,9 +120,9 @@ body {
 			<thead>
 				<tr>
 					<th>거래번호</th>
-					<th>회원ID</th>
-					<th>회원명</th>
-					<th>전화번호</th>
+					<th>주문자 ID</th>
+					<th>주문자 이름</th>
+					<th>연락처</th>
 					<th>배송주소</th>
 					<th>물품현황</th>
 				</tr>

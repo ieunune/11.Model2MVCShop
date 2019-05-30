@@ -25,7 +25,7 @@
      }
      
    	#footer{
-		position:absolute;
+		position:relative;
 		bottom : 0;
 		background: black; 
 		color:white; 
@@ -110,6 +110,30 @@
 		
 		$("button.btn.btn-primary").on("click", function(){
 			fncAddPurchase();
+			
+// 					Kakao.API.request({
+// 				        url: '/v1/payment/ready',
+// 				    	Authorization: 'fb37f365e82d4a3b62d2464496fd49a2',
+// 				    	cid: "TC0ONETIME",
+// 						partner_order_id: 'partner_order_id',
+// 						partner_user_id: 'partner_user_id',
+// 						item_name: '라이언',
+// 						quantity: 1,
+// 						total_amount: 1000,
+// 						vat_amount: 200,
+// 						tax_free_amount: 0,
+// 						approval_url: '//developers.kakao.com/success',
+// 						fail_url: '//developers.kakao.com/fail',
+// 						cancel_url: '//developers.kakao.com/cancel',
+// 				        success: function(res) {
+// 				          	alert('성공');
+// 				        },
+// 				        fail: function(error) {
+// 				          	alert('실패');
+// 				        }
+// 				      })    
+			      
+			    
 		});
 	});
 	
@@ -201,6 +225,8 @@
 	
 		</form>
 	</div>
+	
+	<p>
 	
 	<div id=footer align="center">
 		<label>Copyright.</label>

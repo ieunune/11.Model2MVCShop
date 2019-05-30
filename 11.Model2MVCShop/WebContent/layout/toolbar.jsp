@@ -43,8 +43,8 @@
 	                         	<li><a href="#">회원정보조회</a></li>
 	                         </c:if>
 	                         
-	                         <li class="divider"></li>
-	                         <li><a href="#">etc...</a></li>
+<!-- 	                         <li class="divider"></li> 구분선을 위한 태그-->
+	                         
 	                     </ul>
 	                 </li>
 	                 
@@ -59,8 +59,6 @@
 		                         <li><a href="#">판매상품등록</a></li>
 		                         <li><a href="#">판매상품관리</a></li>
 		                         <li><a href="#">상품주문관리</a></li>
-		                         <li class="divider"></li>
-		                         <li><a href="#">etc..</a></li>
 		                     </ul>
 		                </li>
 	                 </c:if>
@@ -79,12 +77,10 @@
 	                         </c:if>
 	                         
 	                         <li><a href="../history.jsp">최근본상품</a></li>
-	                         <li class="divider"></li>
-	                         <li><a href="#">etc..</a></li>
 	                     </ul>
 	                 </li>
 	                 
-	                 <li><a href="#">etc...</a></li>
+<!-- 	                 <li><a href="#">etc...</a></li> -->
 	             </ul>
 	             
 	             <ul class="nav navbar-nav navbar-right">

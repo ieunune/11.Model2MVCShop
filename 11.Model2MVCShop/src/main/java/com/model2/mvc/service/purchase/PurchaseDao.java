@@ -12,7 +12,7 @@ public interface PurchaseDao {
 	
 	public void addPurchase(Purchase purchase) throws Exception ;
 	
-	public HashMap<String,Object> getPurchaseList(Search search,User user) throws Exception;
+	public HashMap<String,Object> getPurchaseList(Search search,Map<String, Object> map) throws Exception;
 
 	public Purchase getPurchase(int tranNo) throws Exception;
 
@@ -22,7 +22,7 @@ public interface PurchaseDao {
 	
 	public void updatePurchase(Purchase purchase) throws Exception;
 	
-	public int getTotalCount(User user) throws Exception ;
+	public int getTotalCount(Map<String, Object> map) throws Exception ;
 
 	public void updateTranCodeByTranNo(Map<String, Object> map);
 

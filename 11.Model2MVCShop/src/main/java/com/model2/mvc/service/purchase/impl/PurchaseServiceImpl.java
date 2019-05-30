@@ -45,12 +45,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
-	public HashMap<String, Object> getPurchaseList(Search search, User user) throws Exception {
+	public HashMap<String, Object> getPurchaseList(Search search, Map<String,Object> map1) throws Exception {
 		
 		System.out.println("1");
-		int totalCount = purchaseDao.getTotalCount(user);
+		int totalCount = purchaseDao.getTotalCount(map1);
 		
-		HashMap<String, Object> map = purchaseDao.getPurchaseList(search, user);
+		HashMap<String, Object> map = purchaseDao.getPurchaseList(search, map1);
 		map.put("list", map.get("list"));
 		map.put("totalCount", new Integer(totalCount));
 		

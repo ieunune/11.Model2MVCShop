@@ -53,13 +53,13 @@ public class PurchaseDaoImpl implements PurchaseDao{
 	}
 
 	@Override
-	public HashMap<String, Object> getPurchaseList(Search search,User user) throws Exception {
+	public HashMap<String, Object> getPurchaseList(Search search,Map<String, Object> map1) throws Exception {
 		
 		System.out.println("2");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("startRowNum",search.getStartRowNum());
 		map.put("endRowNum",search.getEndRowNum());
-		map.put("buyerId",user.getUserId());
+		map.put("buyerId", map1.get("userId"));
 		
 		map.put("tranStateCode",search.getTranStateCode());
 		
@@ -85,9 +85,9 @@ public class PurchaseDaoImpl implements PurchaseDao{
 	}
 
 	@Override
-	public int getTotalCount(User user) throws Exception {
-		System.out.println("GET TOTAL COUNT BUYER ID : " + user);
-		return sqlSession.selectOne("PurchaseMapper.getTotalCount",user);
+	public int getTotalCount(Map<String, Object> map) throws Exception {
+		
+		return sqlSession.selectOne("PurchaseMapper.getTotalCount",map);
 	}
 
 	@Override

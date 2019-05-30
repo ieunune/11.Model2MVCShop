@@ -100,13 +100,17 @@
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	</select>
 	
-	<select  id="getTotalCount"  parameterType="user"	 resultType="int">
+	<select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT *
 						FROM transaction												
 							<if test="userId neq 'admin'">
 							WHERE
 							buyer_id = #{userId}
+							</if>
+							<if test="tranCode != null">
+							WHERE
+							tran_status_code = #{tranCode}
 							</if>
 						 ) countTable						
 	 </select>

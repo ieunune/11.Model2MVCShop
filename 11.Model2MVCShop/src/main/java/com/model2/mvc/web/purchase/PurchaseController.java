@@ -178,6 +178,8 @@ public class PurchaseController {
 		}
 		search.setPageSize(pageSize);
 		
+		Map<String , Object> searchMap = new HashMap<String, Object>();
+		
 		System.out.println("/listPurchase Search :: " + search + " :: ");
 		if(request.getParameter("tranStateCode") != null) {
 			System.out.println("1");
@@ -185,19 +187,23 @@ public class PurchaseController {
 			if(tranStateCode.equals("000")) {
 				System.out.println("2");
 				search.setTranStateCode(tranStateCode);
+				searchMap.put("tranCode", tranStateCode);
 			} else if(tranStateCode.equals("001")) {
 				System.out.println("3");
 				search.setTranStateCode(tranStateCode);
+				searchMap.put("tranCode", tranStateCode);
 			} else if(tranStateCode.equals("002")) {
 				System.out.println("4");
 				search.setTranStateCode(tranStateCode);
+				searchMap.put("tranCode", tranStateCode);
 			}
 		}
 
 		User user = (User)session.getAttribute("user");
 		System.out.println(" listPurchase User :: " + user);
+		searchMap.put("userId", user.getUserId());
 		
-		Map<String , Object> map=purchaseService.getPurchaseList(search, user);
+		Map<String , Object> map=purchaseService.getPurchaseList(search, searchMap);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		
@@ -214,9 +220,7 @@ public class PurchaseController {
 		model.addAttribute("search", search);
 		
 		if(request.getParameter("tranCode") != null) {
-			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			if(request.getParameter("tranCode").equals("000")) {
-				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 				return "redirect:/purchase/listPurchase?tranStateCode=000";
 			}
 		}
@@ -225,38 +229,5 @@ public class PurchaseController {
 		}
 		return "forward:/purchase/listPurchase.jsp";
 	}
-	
-//	@RequestMapping("/purchaseManagelist")
-//	public String purchaseManagelist( @ModelAttribute("search") Search search , Model model , HttpServletRequest request, HttpSession session) throws Exception{
-//		
-//		System.out.println("/listPurchase");
-//		
-//		if(search.getCurrentPage() == 0 ){
-//			search.setCurrentPage(1);
-//		}
-//		search.setPageSize(pageSize);
-//		
-//		System.out.println(search + " :: ");
-//		
-//		User user = (User)session.getAttribute("user");
-//		System.out.println(" listPurchase User :: " + user);
-//		
-//		Map<String , Object> map=purchaseService.getPurchaseList(search);
-//		
-//		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-//		
-//		System.out.println("==================== DEBUG START =======================");
-//		System.out.println(" :: resultPage :: " + resultPage + " :: ");
-//		System.out.println(" :: search :: " + search + " :: ");
-//		System.out.println(" :: list :: " + map.get("list") + " :: ");
-//		System.out.println("==================== DEBUG START =======================");
-//		// Model °ú View ¿¬°á
-//		
-//		model.addAttribute("list", map.get("list"));
-//		model.addAttribute("resultPage", resultPage);
-//		model.addAttribute("search", search);
-//		
-//		return "forward:/purchase/listPurchase.jsp";
-//	}
 
 }
