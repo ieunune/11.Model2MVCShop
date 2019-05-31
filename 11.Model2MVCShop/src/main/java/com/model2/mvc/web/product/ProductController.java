@@ -112,24 +112,19 @@ public class ProductController {
 			}
 		}
 		
-		history += ","+ prodNo;
+		String[] historyDuplicationCheck = history.split(",");
+		for(int i = 0 ; i <= historyDuplicationCheck.length ; i++) {
+			if(historyDuplicationCheck[i].equals(Integer.toString(prodNo))){
+				break;
+			}else {
+				history += "," + prodNo;
+			}
+		}
 		System.out.println("Get Product history :: " + history);
 		Cookie coo = new Cookie("history", history);
 		coo.setPath("/");
 		coo.setMaxAge(60);
 		response.addCookie(coo);
-		
-		/*String history="";
-		cookie = new Cookie("history",String.valueOf(prodNo));
-		System.out.println("cookie : " + cookie.getValue());
-		history += cookie.getValue()+",";
-		System.out.println("history : " + history);
-		cookie = new Cookie("history", java.net.URLEncoder.encode(history, "utf-8"));
-		
-		cookie.setMaxAge(60*60*24);
-		cookie.setPath("/");
-		
-		response.addCookie(cookie);*/
 		
 		System.out.println("/getProduct");
 		//Business Logic

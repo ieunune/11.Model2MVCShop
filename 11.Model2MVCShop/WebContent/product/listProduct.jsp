@@ -223,7 +223,7 @@
         			<p>${product.amount}&nbsp;개</p>
         			</c:if>
         			<c:if test="${product.amount == 0}">
-        			<p>품절상품</p>
+        			<p style="color: red; font-weight: bold;">품절상품</p>
         			</c:if>
 					<div style="color: white;">
 						&nbsp;<p>

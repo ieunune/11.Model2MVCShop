@@ -53,6 +53,9 @@ button {
 		$("button:contains('로그인')").on(
 				"click",
 				function() {
+					
+					//alert($("input:text").val() + " \n " + $("input:password").val())
+					
 					var id = $("input:text").val();
 					var pw = $("input:password").val();
 
@@ -68,8 +71,7 @@ button {
 						return;
 					}
 
-					$("form").attr("method", "POST").attr("action",
-							"/user/login").attr("target", "_parent").submit();
+					$("form").attr("method", "POST").attr("action","/user/login").attr("target", "_parent").submit();
 				});
 	});
 
@@ -83,24 +85,24 @@ button {
 	
 	//<![CDATA[
 	// 사용할 앱의 JavaScript 키를 설정해 주세요.
-	Kakao.init('3712344ba7ced84f343e902022c6334f');
+// 	Kakao.init('3712344ba7ced84f343e902022c6334f');
 
-	function loginWithKakao() {
-		// 로그인 창을 띄웁니다.
-		// 										Kakao.Auth.setAccessToken(
-		// 												Btw0KYr3D9Ymq0Ismx-CkYbWKMljwpIrg2jMKQo9dRsAAAFrBpHTQQ
-		// 										);
+// 	function loginWithKakao() {
+// 		// 로그인 창을 띄웁니다.
+// 		// 										Kakao.Auth.setAccessToken(
+// 		// 												Btw0KYr3D9Ymq0Ismx-CkYbWKMljwpIrg2jMKQo9dRsAAAFrBpHTQQ
+// 		// 										);
 
-		Kakao.Auth.login({
+// 		Kakao.Auth.login({
 
-			success : function(authObj) {
-				alert(JSON.stringify(authObj));
-			},
-			fail : function(err) {
-				alert(JSON.stringify(err));
-			}
-		});
-	};
+// 			success : function(authObj) {
+// 				alert(JSON.stringify(authObj));
+// 			},
+// 			fail : function(err) {
+// 				alert(JSON.stringify(err));
+// 			}
+// 		});
+// 	};
 
 	//]]>
 </script>
@@ -121,7 +123,7 @@ button {
 	<div class="container">
 		<!--  row Start /////////////////////////////////////-->
 		<div class="row">
-
+			<form>
 			<div class="col-md-12">
 					로그인
 					<hr />
@@ -146,7 +148,7 @@ button {
 						width="200" />
 					</a>
 			</div>
-
+			</form>
 		</div>
 
 	</div>

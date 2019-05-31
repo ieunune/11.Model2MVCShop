@@ -40,8 +40,8 @@ body {
 	top: 0;
 	left: 0;
 	min-width: 100%;
-	min-height: 50px;
-	max-height: 550px;
+	min-height: 760px;
+	max-height: 760px;
 }
 
 .carousel-inner>.item {
