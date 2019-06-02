@@ -34,6 +34,11 @@ public class CommentServiceImpl implements CommentService{
 	public Map<String, Object> getCommentList(int prodNo) throws Exception {
 		return commentDao.getCommentList(prodNo);
 	}
+	@Override
+	public void updateCommentLike(int commentNo) throws Exception {
+		commentDao.updateCommentLike(commentNo);	
+	}
+	
 
 
 }

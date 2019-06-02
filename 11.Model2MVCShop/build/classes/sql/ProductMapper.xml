@@ -53,13 +53,13 @@
                 						<if test="searchCondition != null">
                 						<where>
 											<if test="searchCondition == 0 and searchKeyword !='' ">
-										 		AND p.prod_no like '%'||#{searchKeyword}||'%'
+										 		p.prod_no like '%'||#{searchKeyword}||'%'
 											</if>
 											<if test="searchCondition == 1 and searchKeyword !='' ">
-								 				AND p.prod_name like '%'||#{searchKeyword}||'%'
+								 				p.prod_name like '%'||#{searchKeyword}||'%'
 											</if>
 											<if test="searchCondition == 2 and searchKeyword !='' ">
-												AND p.price like #{searchKeyword}
+												p.price like #{searchKeyword}
 											</if>
 										</where>
 										</if>
@@ -82,6 +82,7 @@
 		FROM ( SELECT p.prod_no, p.PROD_NAME, p.PROD_DETAIL, p.MANUFACTURE_DAY, p.PRICE, p.IMAGE_FILE, p.REG_DATE, p.PROD_AMOUNT
                FROM product p
 				<if test="searchCondition != null">
+                    <where>
 					<if test="searchCondition == 0 and searchKeyword !='' ">
 						AND p.prod_no like '%'||#{searchKeyword}||'%'
 					</if>
@@ -91,6 +92,7 @@
 					<if test="searchCondition == 2 and searchKeyword !='' ">
 						AND p.price like #{searchKeyword}
 					</if>
+                    </where>
 				</if> 
 		ORDER BY p.prod_no) countTable											
 	 </select>

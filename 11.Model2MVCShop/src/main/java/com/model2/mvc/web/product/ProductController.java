@@ -36,74 +36,74 @@ import com.model2.mvc.service.purchase.PurchaseService;
 @RequestMapping("/product/*")
 public class ProductController {
 
-
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
 	@Autowired
 	@Qualifier("commentServiceImpl")
 	private CommentService commentService;
-	
+
 	public ProductController() {
 		System.out.println("ProductController Defualt Constructor");
 	}
-	
-	@Resource(name="uploadPath")
+
+	@Resource(name = "uploadPath")
 	String uploadPath;
-	
+
 	@Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
-	
+
 	@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
-	
-	
+
 	@RequestMapping("/addProductView")
 	public String addProductView() throws Exception {
 
 		System.out.println("/ProductView");
-		
+
 		return "redirect:/product/addProductView.jsp";
 	}
-	
+
 	@RequestMapping("/addProduct")
-	public String addProduct( @ModelAttribute("product") Product product, HttpServletRequest request, HttpServletResponse response, @RequestParam("file") MultipartFile file) throws Exception {
+	public String addProduct(@ModelAttribute("product") Product product, HttpServletRequest request,
+			HttpServletResponse response, @RequestParam("file") MultipartFile file) throws Exception {
 
 		System.out.println("/addProduct");
-		//Business Logic
+		// Business Logic
 		String date = product.getManuDate();
 		String temp = "";
 		String[] dateArray = date.split("-");
-		
+
 		System.out.println("file :: " + file.getOriginalFilename());
 		product.setFileName(file.getOriginalFilename());
-		
+
 		File target = new File(uploadPath, file.getOriginalFilename());
 		FileCopyUtils.copy(file.getBytes(), target);
-		
-		for(int i = 0 ; i < dateArray.length ; i++) {
+
+		for (int i = 0; i < dateArray.length; i++) {
 			temp += dateArray[i];
 		}
-		
-		System.out.println("파싱후 :: " + temp );
-		
+
+		System.out.println("파싱후 :: " + temp);
+
 		product.setManuDate(temp);
-		
+
 		productService.addProduct(product);
-		
+
 		request.setAttribute("product", product);
-		
+
 		return "forward:/product/addProduct.jsp";
 	}
-	
+
 	@RequestMapping("/getProduct")
-	public String getProduct( @RequestParam("menu") String menu, @RequestParam("prodNo") int prodNo , Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+	public String getProduct(@RequestParam("menu") String menu, @RequestParam("prodNo") int prodNo, Model model,
+			HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		
 		request.setCharacterEncoding("utf-8");
-		
+
 		String history = "";
 		Cookie[] cookies = request.getCookies();
-		if (cookies!=null && cookies.length > 0) {
+		if (cookies != null && cookies.length > 0) {
 			for (int i = 0; i < cookies.length; i++) {
 				Cookie cookie = cookies[i];
 				if (cookie.getName().equals("history")) {
@@ -112,114 +112,133 @@ public class ProductController {
 			}
 		}
 		
-		String[] historyDuplicationCheck = history.split(",");
-		for(int i = 0 ; i <= historyDuplicationCheck.length ; i++) {
-			if(historyDuplicationCheck[i].equals(Integer.toString(prodNo))){
-				break;
-			}else {
-				history += "," + prodNo;
-			}
-		}
+		
+		history += "," + prodNo;
+		
+//		System.out.println(" @@@@@@@@@ history : " + history);
+//			String[] historyDuplicationCheck = history.split(",");
+//			System.out.println(" @@@@@@@@@ : " + 1);
+//			for (int i = 1 ; i <= historyDuplicationCheck.length; i++) {
+//				System.out.println(" @@@@@@@@@ : " + 2 + " "+ historyDuplicationCheck[i]);				
+//				if ( ! (historyDuplicationCheck[i].equals(Integer.toString(prodNo) ) ) ) {
+//					System.out.println(" @@@@@@@@@ : " + 3);
+//				} else {
+//					history += "," + prodNo;
+//				}
+//			}
+
 		System.out.println("Get Product history :: " + history);
 		Cookie coo = new Cookie("history", history);
 		coo.setPath("/");
-		coo.setMaxAge(60);
+		coo.setMaxAge(600);
 		response.addCookie(coo);
-		
+
 		System.out.println("/getProduct");
-		//Business Logic
+		// Business Logic
 		Product product = productService.getProduct(prodNo);
-		
+
 		Map<String, Object> map = commentService.getCommentList(prodNo);
-		
+
 		// Model 과 View 연결
 		session.setAttribute("product", product);
 		request.setAttribute("list", map.get("list"));
-		if(menu.equals("manage")) {
+		if (menu.equals("manage")) {
 			return "forward:/product/updateProduct.jsp";
 		}
-		
+
 		return "forward:/product/getProduct.jsp";
 	}
-	
+
 	@RequestMapping("/updateProductView")
-	public String updateProductView( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
+	public String updateProductView(@RequestParam("prodNo") int prodNo, Model model) throws Exception {
 
 		System.out.println("/updateUserView");
 
 		Product product = productService.getProduct(prodNo);
 		// Model 과 View 연결
 		model.addAttribute("product", product);
-		
+
 		return "forward:/product/updateProductView.jsp";
 	}
-	
+
 	@RequestMapping("/updateProduct")
-	public String updateproduct(@RequestParam("prodNo") int prodNo, @RequestParam("file") MultipartFile file, @ModelAttribute("product") Product product , Model model , HttpSession session) throws Exception{
+	public String updateproduct(@RequestParam("prodNo") int prodNo, @RequestParam("file") MultipartFile file,
+			@ModelAttribute("product") Product product, Model model, HttpSession session) throws Exception {
 
 		System.out.println("/updateProduct");
 
 		System.out.println(" updateProduct : " + file.getOriginalFilename());
 		product.setFileName(file.getOriginalFilename());
-		
+
 		File target = new File(uploadPath, file.getOriginalFilename());
 		FileCopyUtils.copy(file.getBytes(), target);
-		
+
 		productService.updateProduct(product);
-		
+
 		product = productService.getProduct(prodNo);
-		
+
 		model.addAttribute("product", product);
-		return "redirect:/product/getProduct?prodNo="+prodNo+"&menu=search";
+		return "redirect:/product/getProduct?prodNo=" + prodNo + "&menu=search";
 	}
-	
+
 	@RequestMapping("/listProduct")
-	public String listProduct( @ModelAttribute("search") Search search, Model model , HttpServletRequest request) throws Exception{
-		
+	public String listProduct(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
+			throws Exception {
+
 		System.out.println("/listProduct");
-		
-		if(search.getCurrentPage() == 0 ){
+
+		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
-		
-		if(request.getParameter("pageSize") == null) {
+
+		if (request.getParameter("pageSize") == null) {
 			search.setPageSize(pageSize);
 		} else {
-			String repageSize = (String)request.getParameter("pageSize");
+			String repageSize = (String) request.getParameter("pageSize");
 			search.setPageSize(Integer.parseInt(repageSize));
 		}
-		
+
 		System.out.println("1");
-		
+
 		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("search",search);
-		
-		if(request.getParameter("order") == null) {
+		searchMap.put("search", search);
+
+		if (request.getParameter("order") == null) {
 			searchMap.put("order", "p.prod_no");
-		} else if(request.getParameter("order").equals("1")) {
+		} else if (request.getParameter("order").equals("1")) {
 			searchMap.remove("order");
 			searchMap.put("order", "p.PRICE DESC");
-		} else if(request.getParameter("order").equals("2")){
+		} else if (request.getParameter("order").equals("2")) {
 			searchMap.remove("order");
 			searchMap.put("order", "p.PRICE ASC");
-		}	
-			
+		} else if (request.getParameter("order").equals("3")) {
+			searchMap.remove("order");
+			searchMap.put("order", "p.prod_amount ASC");
+		} else if (request.getParameter("order").equals("4")) {
+			searchMap.remove("order");
+			searchMap.put("order", "p.manufacture_day DESC");
+		} else if (request.getParameter("order").equals("5")) {
+			searchMap.remove("order");
+			searchMap.put("order", "p.reg_date DESC");
+		} 
+
 		System.out.println(" getParameter : " + request.getParameter("menu"));
-		
+
 		System.out.println(search + " :: ");
 		// Business logic 수행
-		System.out.println(search.getStartRowNum()+" "+search.getEndRowNum());
-		Map<String , Object> map=productService.getProductList(searchMap);
-		
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, search.getPageSize());
+		System.out.println(search.getStartRowNum() + " " + search.getEndRowNum());
+		Map<String, Object> map = productService.getProductList(searchMap);
+
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				search.getPageSize());
 		System.out.println(resultPage);
-		
-		// Model 과 View 연결	
+
+		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
-		
+
 		return "forward:/product/listProduct.jsp";
 	}
-	
+
 }

@@ -10,8 +10,14 @@ public class Comment {
 	private String reply;
 	private String InputDate;
 	private String userId;
+	private int likeCnt;
 	
-	
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+	public void setLikeCnt(int likeCnt) {
+		this.likeCnt = likeCnt;
+	}
 	public String getUserId() {
 		return userId;
 	}

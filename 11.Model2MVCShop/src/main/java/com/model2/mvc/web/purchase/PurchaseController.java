@@ -165,6 +165,9 @@ public class PurchaseController {
 		map.put("tranCode", tranCode);
 		purchaseService.updateTranCodeByTranNo(map);
 		// http://localhost:8080/purchase/listPurchase?tranStateCode=000
+		if(request.getParameter("test") != null) {
+			return "forward:/purchase/listPurchase";
+		}
 		return "forward:/purchase/listPurchase?tranCode=000";
 	}
 		

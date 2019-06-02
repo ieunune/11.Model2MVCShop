@@ -18,5 +18,7 @@ public interface CommentDao {
 	public void addComment(Comment comment) throws Exception;
 		
 	public Map<String, Object> getCommentList(int prodNo) throws Exception;
+	
+	public void updateCommentLike(int commentNo) throws Exception;
 
 }

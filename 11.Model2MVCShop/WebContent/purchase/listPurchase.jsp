@@ -54,7 +54,7 @@ body {
 		$("#state").on("click",function(){
 			//alert($(this).children("#tranNo").val())
 			//alert($(this).children("#userId").val())
-			$(self.location).attr("href","/purchase/updateTranCodeByTranNo?tranNo="+$(this).children("#tranNo").val()+"&tranCode="+$(this).children("#tranCode").val());
+			$(self.location).attr("href","/purchase/updateTranCodeByTranNo?tranNo="+$(this).children("#tranNo").val()+"&tranCode="+$(this).children("#tranCode").val()+"&test=1");
 			alert('수령완료처리 되었습니다.')
 		});
 		

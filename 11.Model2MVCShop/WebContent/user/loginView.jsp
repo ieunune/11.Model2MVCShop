@@ -20,11 +20,14 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<!-- kakao CDN -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 input {
 	border: 1px solid black;
+	width: 300px;
+	height: 30px;
 }
 
 hr {
@@ -35,10 +38,18 @@ button {
 	background-color: black;
 	color: white;
 	border: 1px solid black;
-	width: 175px;
-	height: 30px;
-	font-size: 10px;
+	width: 200px;
+	height: 40px;
+	font-size: 14px;
 	font-weight: bold;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
 }
 </style>
 
@@ -50,12 +61,16 @@ button {
 		$("#userId").focus();
 
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$("a:contains('비밀번호찾기')").on("click", function() {
+			$(self.location).attr("href", "findUserView.jsp;")
+		});
+
 		$("button:contains('로그인')").on(
 				"click",
 				function() {
-					
+
 					//alert($("input:text").val() + " \n " + $("input:password").val())
-					
+
 					var id = $("input:text").val();
 					var pw = $("input:password").val();
 
@@ -71,7 +86,8 @@ button {
 						return;
 					}
 
-					$("form").attr("method", "POST").attr("action","/user/login").attr("target", "_parent").submit();
+					$("form").attr("method", "POST").attr("action",
+							"/user/login").attr("target", "_parent").submit();
 				});
 	});
 
@@ -82,29 +98,33 @@ button {
 			self.location = "/user/addUser"
 		});
 	});
-	
-	//<![CDATA[
-	// 사용할 앱의 JavaScript 키를 설정해 주세요.
-// 	Kakao.init('3712344ba7ced84f343e902022c6334f');
 
-// 	function loginWithKakao() {
-// 		// 로그인 창을 띄웁니다.
-// 		// 										Kakao.Auth.setAccessToken(
-// 		// 												Btw0KYr3D9Ymq0Ismx-CkYbWKMljwpIrg2jMKQo9dRsAAAFrBpHTQQ
-// 		// 										);
+	$(function() {
 
-// 		Kakao.Auth.login({
+		$("#custom-login-btn").on("click", function() {
 
-// 			success : function(authObj) {
-// 				alert(JSON.stringify(authObj));
-// 			},
-// 			fail : function(err) {
-// 				alert(JSON.stringify(err));
-// 			}
-// 		});
-// 	};
+			alert("구현준비중");
 
-	//]]>
+			Kakao.init('3712344ba7ced84f343e902022c6334f');
+
+			function loginWithKakao() {
+				// 로그인 창을 띄웁니다.
+				// 										Kakao.Auth.setAccessToken(
+				// 												Btw0KYr3D9Ymq0Ismx-CkYbWKMljwpIrg2jMKQo9dRsAAAFrBpHTQQ
+				// 										);
+
+				Kakao.Auth.login({
+					success : function(authObj) {
+						alert(JSON.stringify(authObj));
+					},
+					fail : function(err) {
+						alert(JSON.stringify(err));
+					}
+				});
+			}
+			;
+		});
+	});
 </script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
@@ -112,43 +132,64 @@ button {
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar navbar-inverse">
-		<div class="container" align="center">
-			<a class="navbar-brand" href="/index.jsp">Eunwoo Shop</a>
+
+
+	<div class="navbar navbar-inverse" style="background: black;">
+		<div class="container">
+			<div class="col-md-12" style="margin-left: 45%">
+				<a class="navbar-brand" href="/index.jsp" style="color: white;">Eunwoo</a>
+			</div>
 		</div>
 	</div>
 	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<div class="container" style="margin-top: 30px">
 		<!--  row Start /////////////////////////////////////-->
+
 		<div class="row">
 			<form>
-			<div class="col-md-12">
-					로그인
+				<div class="col-sm-6 col-md-6">
+
+					<b>로그인</b> <br />
+
 					<hr />
-					아이디와 비밀번호를 입력하여 로그인하시기 바랍니다. 
-					<br /> 
-					<input type="text" name="userId" id="userId" placeholder="Id">
-					<br/>
+					<b>기존회원</b><br>
+					<p />
+					<p />
+					<small> 아이디와 비밀번호를 입력하여 로그인하시기 바랍니다. </small> <br /> <input
+						type="text" name="userId" id="userId" placeholder="Id" /> <br />
 					<p>
-					<input type="password" name="password" id="password"
-						placeholder="Password"> <br />
+						<input type="password" name="password" id="password"
+							placeholder="Password" /> <br />
 					<p>
-					<button type="button">로그인</button><br/>
+						<button type="button">로그인</button>
+						<br />
 					<p>
-					
-					<button type="button">회원가입</button>
-					
-					<a href="#"><h6>비밀번호찾기</h6></a>
-					<hr/>
-					<a id="custom-login-btn"
-						href="javascript:loginWithKakao()"> <img
+					<h6>
+						<a href="#">비밀번호찾기</a>
+					</h6>
+					<hr />
+
+					<a id="custom-login-btn" href="javascript:loginWithKakao()"> <img
 						src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg"
 						width="200" />
 					</a>
-			</div>
+				</div>
 			</form>
+			<div class="col-sm-6 col-md-6" style="margin-top: 20px">
+
+				<hr>
+
+				<b>회원가입</b> <br> <small> 가입을 위한 개인정보를 받고있습니다. <br>
+					회원가입을 진행 하시려면 아래의 버튼을 클릭하여주세요.
+				</small> <br>
+
+				<p />
+
+				<button type="button">회원가입</button>
+
+			</div>
 		</div>
 
 	</div>

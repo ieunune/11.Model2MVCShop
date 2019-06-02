@@ -15,5 +15,7 @@ public interface CommentService {
 	//public HashMap<String,Object> getProductList(SearchVO searchVO) throws Exception;
 
 	//public void updateProduct(ProductVO productVO) throws Exception;
+	
+	public void  updateCommentLike(int commentNo) throws Exception;
 
 }

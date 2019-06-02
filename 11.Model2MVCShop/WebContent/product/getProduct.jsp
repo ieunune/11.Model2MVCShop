@@ -31,6 +31,14 @@
 <script type="text/javascript">
 $(function () {
 	
+	
+	$(".like").on("click",function(){
+		alert($(this).children("input").val());
+		self.location = "/comment/commentLike?commentNo="+$(this).children("input").val()+"&prod_no=${product.prodNo}";
+		//self.location ="/product/getProduct?prodNo="+$(this).children("input").val()+"&menu="+$("#menu").val();
+		//$("form").attr("method" , "GET").attr("action" , "/comment/commentLike?commentNo="+$("#commentNo").val()+"&prod_no=${product.prodNo}").submit();
+	});
+	
 	$("#request").on("click",function(){
 		alert("준비중인 기능입니다.\n이용에 불편을드려 죄송합니다.");	
 	});
@@ -149,29 +157,45 @@ $(function () {
 		
 		<form>
 		<div class="row">
-			<div class="col-xs-4 col-md-12" align="left"><b><h3>한줄평</h3></b></div>
+			<div class="col-xs-4 col-md-12" align="left"><h3><b>한줄평</b></h3></div>
 		</div>
-				
+		
+		<c:set var="i" value="0" />	
 		<c:forEach var="comment" items="${list}">
+			<c:set var="i" value="${ i+1 }" />
+			
 		<div class="row">
 			<div class="col-sm-9 col-md-10" align="left">
 			<h4>
 				<b>${comment.userId}</b>&nbsp;
 				<small>${comment.inputDate}</small>&nbsp;
+				<c:if test="${i <= 3}">
+				<b>BEST ${i}</b>
+				</c:if>
 			</h4>
 			<h5>${comment.reply}</h5>
 			</div>
-			<div class="col-sm-3 col-md-2" align="right">
-				<button class="btn btn-default">
-					<span class="glyphicon glyphicon-thumbs-up">0</span>
-				</button>
-				<button class="btn btn-default">
-				<span class="glyphicon glyphicon-thumbs-down">0</span>
-				</button>
+			<div class="col-sm-3 col-md-2 like" align="right">
+				
+				<input type="hidden" id="commentNo" value="${comment.commentNo}">
+      				<span class="glyphicon glyphicon-thumbs-up" id="like">
+      				${comment.likeCnt}
+      			</span>
+      			
+<!-- 				<button class="btn btn-default"> -->
+<%-- 					<input type="hidden" id="commentNo" name="commentNo" value='${comment.commentNo}'/> --%>
+<!-- 					<span class="glyphicon glyphicon-thumbs-up" id="like"> -->
+<%-- 						${comment.likeCnt} --%>
+<!-- 					</span> -->
+<!-- 				</button> -->
+<!-- 				<button class="btn btn-default"> -->
+<!-- 				<span class="glyphicon glyphicon-thumbs-down">0</span> -->
+<!-- 				</button> -->
 <!-- 				<span class="glyphicon glyphicon-refresh"></span> -->
 <!-- 				<span class="glyphicon glyphicon-remove"></span> -->
 			</div>
 		</div>
+		
 		</c:forEach>
 		<br>
 		

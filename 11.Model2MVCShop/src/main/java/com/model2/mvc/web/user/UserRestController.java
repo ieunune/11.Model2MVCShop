@@ -29,6 +29,18 @@ public class UserRestController {
 		System.out.println(this.getClass());
 	}
 	
+	@RequestMapping( value="json/duplication/{userId}", method=RequestMethod.GET )
+	public String duplication(@PathVariable String userId) throws Exception {
+		
+		boolean result = userService.checkDuplication(userId);
+		
+		if(result) {
+			return "사용가능한 아이디입니다.";
+		}
+		
+		return "이미 존재하는 아이디 입니다. \n 다른 아이디를 입력해주세요";
+	}
+	
 	@RequestMapping( value="json/getUser/{userId}", method=RequestMethod.GET )
 	public User getUser( @PathVariable String userId ) throws Exception{
 		

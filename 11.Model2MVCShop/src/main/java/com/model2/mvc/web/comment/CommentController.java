@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,17 @@ public class CommentController {
 	
 	public CommentController() {
 		System.out.println("CommentController Dafault Constructor");
+	}
+	
+	
+	@RequestMapping("/commentLike")
+	public String commentLike(@RequestParam("commentNo") int commentNo, @RequestParam("prod_no") int prodNo) throws Exception {
+		
+		
+		System.out.println( "commentLike commentNo : " + commentNo);
+		commentService.updateCommentLike(commentNo);
+		
+		return "redirect:/comment/listComment?prod_No="+prodNo+"&menu=search";
 	}
 	
 	@RequestMapping("/addComment")
@@ -80,7 +92,7 @@ public class CommentController {
 		System.out.println(" :: " + map.get("list") + " \n");
 		request.setAttribute("list", map.get("list"));
 		
-		return "forward:/product/getProduct.jsp";
+		return "forward:/product/getProduct.jsp;";
 	}
 	
 }

@@ -48,4 +48,8 @@ public class CommentDaoImpl implements CommentDao {
 		
 		return map;
 	}
+	@Override
+	public void updateCommentLike(int commentNo) throws Exception {
+		sqlSession.update("CommentMapper.updateLike", commentNo);
+	}
 }

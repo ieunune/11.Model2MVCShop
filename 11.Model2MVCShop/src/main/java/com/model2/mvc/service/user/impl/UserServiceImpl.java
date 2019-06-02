@@ -63,4 +63,8 @@ public class UserServiceImpl implements UserService{
 		}
 		return result;
 	}
+	
+	public User findUser(User user) throws Exception {
+		return userDao.findUser(user);
+	}
 }

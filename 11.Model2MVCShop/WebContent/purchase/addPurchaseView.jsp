@@ -18,6 +18,8 @@
 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 <!--  post CDN -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<!--  kakao CDN -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <!--  CSS -->
 <style>
      body {
@@ -45,6 +47,28 @@
 
 <script type="text/javascript">
 	
+	$(function(){
+		
+		$("#kakaoPay").on("click",function(){
+			
+			$.ajax({
+				url : "https://kapi.kakao.com/v1/payment/ready" ,
+				method : "POST",
+				dataType : "json",
+				data :  convertSearch ,
+				contentType: "application/x-www-form-urlencoded; charset=euc-kr",
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json;charset=euc_kr"
+				},
+				success : function(JSONData, status){				
+					$("#searchKeyword").autocomplete({
+						source : JSONData
+					});
+				}
+			});
+		});
+	});
 	function sample4_execDaumPostcode() {
 	new daum.Postcode({
     	oncomplete: function(data) {
@@ -218,6 +242,7 @@
 			
 			<div class="row">
 	  			<div class="col-md-12 text-center">
+	  				<img alt="" src="/images/openApi-Images/payment_icon_yellow_medium.png" id="kakaoPay"/>
 	  				<button type="button" class="btn btn-primary">구매</button>
 	  				<a id="reset" class="btn btn-primary btn" role="button">재입력</a>
 	  			</div>

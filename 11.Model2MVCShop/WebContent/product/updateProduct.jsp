@@ -98,7 +98,7 @@ $(function () {
 				</div>
 				<div class="col-xs-8 col-md-4">
 					<input type="text" class="form-control" id="prodName"
-						name="prodName" placeholder="${product.prodName}">
+						name="prodName" value="${product.prodName}">
 				</div>
 			</div>
 
@@ -110,7 +110,7 @@ $(function () {
 				</div>
 				<div class="col-xs-8 col-md-4">
 					<input type="text" class="form-control" id="prodDetail"
-						name="prodDetail" placeholder="${product.prodDetail}">
+						name="prodDetail" value="${product.prodDetail}">
 				</div>
 			</div>
 
@@ -122,7 +122,7 @@ $(function () {
 				</div>
 				<div class="col-xs-7 col-md-3">
 					<input type="text" class="form-control" id="manuDate"
-						name="manuDate" placeholder="${product.manuDate}"
+						name="manuDate" value="${product.manuDate}"
 						readonly="readonly">
 				</div>
 				<div class="col-xs-1 col-md-1">
@@ -139,7 +139,7 @@ $(function () {
 				</div>
 				<div class="col-xs-7 col-md-3">
 					<input type="text" class="form-control" id="price" name="price"
-						placeholder="${product.price}">
+						value="${product.price}">
 				</div>
 				<div class="col-xs-1 col-md-1">¿ø</div>
 			</div>
@@ -152,7 +152,7 @@ $(function () {
 				</div>
 				<div class="col-xs-7 col-md-3">
 					<input type="text" class="form-control" id="amount" name="amount"
-						placeholder="${product.amount}" maxlength="3">
+						value="${product.amount}" maxlength="3">
 				</div>
 				<div class="col-xs-1 col-md-1">°³</div>
 			</div>

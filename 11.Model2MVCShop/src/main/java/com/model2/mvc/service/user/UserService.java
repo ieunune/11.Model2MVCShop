@@ -21,6 +21,8 @@ public interface UserService {
 	// 회원정보수정
 	public void updateUser(User user) throws Exception;
 	
+	public User findUser(User user) throws Exception;
+	
 	// 회원 ID 중복 확인
 	public boolean checkDuplication(String userId) throws Exception;
 	

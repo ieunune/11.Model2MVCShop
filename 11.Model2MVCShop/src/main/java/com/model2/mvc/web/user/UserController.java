@@ -50,6 +50,20 @@ public class UserController {
 		return "redirect:/user/addUserView.jsp";
 	}
 	
+	@RequestMapping( value="findUser", method=RequestMethod.POST )
+	public String findUser( @ModelAttribute("user") User user, Model model ) throws Exception {
+
+		System.out.println("/user/addUser : POST");
+		
+		//Business Logic
+		user = userService.findUser(user);
+		
+		// Model°ú View ¿¬°á
+		model.addAttribute("user", user);
+		
+		return "forward:/user/findUser.jsp";
+	}
+	
 	@RequestMapping( value="addUser", method=RequestMethod.POST )
 	public String addUser( @ModelAttribute("user") User user ) throws Exception {
 
