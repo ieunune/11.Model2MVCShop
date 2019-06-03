@@ -2,6 +2,7 @@
 <%@ page pageEncoding="EUC-KR"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 
@@ -57,10 +58,12 @@
 	button{
 		background-color: black;
 		color: white;
-		width : 150px;
+		width : 192px;
 		height: auto;
 		border: 1px solid black;
 		border-right: 1px solid white;
+		margin: 0px;
+		padding: 0px;
 	}
 	.search{
 		border-radius: 0px 20px 20px 0px / 0px 20px 20px 0px;
@@ -195,8 +198,8 @@
 				  		<span>표시개수</span>
 				  		<span>
 	    						<select name="pageSize" id="selectPageSize" onchange="javascript:getPageSize()" style="width: 50px">
-									<option value="6" ${ search.pageSize == 6 ? "selected" : "" }>6</option>
-									<option value="9" ${ search.pageSize == 9 ? "selected" : "" }>9</option>
+									<option value="4" ${ search.pageSize == 4 ? "selected" : "" }>6</option>
+									<option value="8" ${ search.pageSize == 8 ? "selected" : "" }>9</option>
 									<option value="12" ${ search.pageSize == 12 ? "selected" : "" } >12</option>
 									<option value="15" ${ search.pageSize == 15 ? "selected" : "" } >15</option>
 								</select>
@@ -211,7 +214,6 @@
 	    	
 	    	<div class="row">
 	    	<div class="col-md-12 col-sm-12 col-xm-12">
-	    		
 	    		<table>
 	    			<tr>
 						<td>
@@ -228,10 +230,9 @@
 						</td>
 						<td>
 							<button>▼ 신상품순</button>
-						</td>						
+						</td>					
 					</tr>
 				</table>
-				
 	    	</div>	     
 	    </div>
 		
@@ -259,7 +260,7 @@
    			</a>
    			<div class="caption" align="center">
         			<b style="font-size: 18px">${product.prodName}</b>
-        			<p>${product.price}&nbsp;원</p>
+        			<p><f:formatNumber value="${product.price}" pattern="#,###"></f:formatNumber>&nbsp;원</p>
         			<c:if test="${product.amount <= 50}">
         			<p><b>★★품절임박★★</b></p>
         			</c:if>

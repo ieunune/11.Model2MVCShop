@@ -148,15 +148,8 @@ public class ProductRestController {
 		
 		request.setCharacterEncoding("euc_kr");
 		
-		//System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+);
 		String keyword = java.net.URLDecoder.decode(search.getSearchKeyword(),"euc_kr");
-		//URLEncoder.encode(keyword, "UTF-8");
 		
-		System.out.println("listProduct : "+search);
-		//search.setCurrentPage(curPage);
-		System.out.println(" [before] ListProduct Keyword : "+keyword);
-		//String keyword = new String(search.getSearchKeyword().getBytes("euc_kr"),"utf-8");
-		//System.out.println(" [After] ListProduct Keyword : "+keyword);
 		search.setSearchKeyword(keyword);
 		
 		Map<String, Object> searchMap= new HashMap<String, Object>();
@@ -181,7 +174,6 @@ public class ProductRestController {
 			searchMap.put("order", "PRICE ASC");
 		}
 			
-		//map.put("list", );
 		List<String> list = productService.getProductSearchList(searchMap);
 		System.out.println(" *********************** " +list);
 		return list;

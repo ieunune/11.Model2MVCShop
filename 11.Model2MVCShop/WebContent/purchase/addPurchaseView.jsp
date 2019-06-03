@@ -242,7 +242,7 @@
 			
 			<div class="row">
 	  			<div class="col-md-12 text-center">
-	  				<img alt="" src="/images/openApi-Images/payment_icon_yellow_medium.png" id="kakaoPay"/>
+<!-- 	  				<img alt="" src="/images/openApi-Images/payment_icon_yellow_medium.png" id="kakaoPay"/> -->
 	  				<button type="button" class="btn btn-primary">구매</button>
 	  				<a id="reset" class="btn btn-primary btn" role="button">재입력</a>
 	  			</div>

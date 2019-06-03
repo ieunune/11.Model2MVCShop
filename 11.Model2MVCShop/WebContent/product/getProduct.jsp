@@ -33,10 +33,26 @@ $(function () {
 	
 	
 	$(".like").on("click",function(){
-		alert($(this).children("input").val());
-		self.location = "/comment/commentLike?commentNo="+$(this).children("input").val()+"&prod_no=${product.prodNo}";
-		//self.location ="/product/getProduct?prodNo="+$(this).children("input").val()+"&menu="+$("#menu").val();
-		//$("form").attr("method" , "GET").attr("action" , "/comment/commentLike?commentNo="+$("#commentNo").val()+"&prod_no=${product.prodNo}").submit();
+		// ajax 활용하기 
+		//alert($(this).children("input").val());
+		
+		var commentNo = $(this).children("input").val();
+		
+		$.ajax({
+				url : "/comment/json/commentLike/"+commentNo+"/"+${product.prodNo} ,
+				method : "POST",
+				dataType : "json",
+				data :  convertSearch ,
+				contentType: "application/x-www-form-urlencoded; charset=euc-kr",
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json;charset=euc_kr"
+				},
+				success : function(JSONData, status){				
+					$("#like").val(status);
+				}
+			});
+		//self.location = "/comment/commentLike?commentNo="+$(this).children("input").val()+"&prod_no=${product.prodNo}";
 	});
 	
 	$("#request").on("click",function(){

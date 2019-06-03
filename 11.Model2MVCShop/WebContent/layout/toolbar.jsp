@@ -31,10 +31,12 @@
 	             
 	              <!--  회원관리 DrowDown -->
 	              <li class="dropdown">
+	              		 <c:if test="${sessionScope.user.role != null}">
 	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color: white;">
 	                         <span >내 정보</span>
 	                         <span class="caret"></span>
 	                     </a>
+	                     </c:if>
 	                     <ul class="dropdown-menu">
 	                         <li><a href="#">내 정보조회</a></li>
 	                         
