@@ -15,5 +15,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/user/Downloads/mongo-java-driver-2.13.0-20141111.194004-18.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
