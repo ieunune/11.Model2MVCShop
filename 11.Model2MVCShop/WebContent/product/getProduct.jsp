@@ -31,10 +31,31 @@
 <script type="text/javascript">
 $(function () {
 	
-	
 	$(".like").on("click",function(){
-		alert($(this).children("input").val());
-		self.location = "/comment/commentLike?commentNo="+$(this).children("input").val()+"&prod_no=${product.prodNo}";
+		
+		var commentNo = $(this).children("input").val();
+		var likeCnt = $(this).children("span");
+		
+		$.ajax({
+			url : "/comment/json/commentLike/"+commentNo ,
+			method : "POST",
+			dataType : "json",
+// 			data :  convertSearch ,
+			contentType: "application/x-www-form-urlencoded; charset=euc-kr",
+			headers : {
+				"Accept" : "application/json",
+				"Content-Type" : "application/json;charset=euc_kr"
+			},
+			success : function(JSONData, status){				
+				
+// 				alert($(this).children().children("i").text());
+// 				alert($(this).children().children("i").val());
+				//$(".like").text();
+				likeCnt.text(" "+JSONData.likeCnt);
+			}
+		});
+		//alert($(this).children("input").val());
+		//self.location = "/comment/commentLike?commentNo="+$(this).children("input").val()+"&prod_no=${product.prodNo}";
 		//self.location ="/product/getProduct?prodNo="+$(this).children("input").val()+"&menu="+$("#menu").val();
 		//$("form").attr("method" , "GET").attr("action" , "/comment/commentLike?commentNo="+$("#commentNo").val()+"&prod_no=${product.prodNo}").submit();
 	});
@@ -177,10 +198,10 @@ $(function () {
 			</div>
 			<div class="col-sm-3 col-md-2 like" align="right">
 				
-				<input type="hidden" id="commentNo" value="${comment.commentNo}">
+				<input type="hidden" id="commentNo" value="${comment.commentNo}"/>
       				<span class="glyphicon glyphicon-thumbs-up" id="like">
       				${comment.likeCnt}
-      			</span>
+      				</span>
       			
 <!-- 				<button class="btn btn-default"> -->
 <%-- 					<input type="hidden" id="commentNo" name="commentNo" value='${comment.commentNo}'/> --%>

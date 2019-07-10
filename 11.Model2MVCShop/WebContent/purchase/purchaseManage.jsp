@@ -27,6 +27,14 @@
 body {
 	padding-top: 50px;
 }
+button{
+	width: 280px;
+	height: 30px;
+	border : 1px solid black;
+	background: black;
+	color : white;
+	font-size: 15px;
+}
 </style>
 
 <script type="text/javascript">
@@ -96,7 +104,7 @@ body {
 	<div class="container">
 	
 		<div class="page-header text-info">
-			<h3>구매목록조회</h3>
+			<h3>상품주문관리</h3>
 		</div>
 	
 		<div class="row">
@@ -108,13 +116,15 @@ body {
 		</div>
 		
 		<div class="row">
-			<div class="col-md-6 text-left">
-				<button type="button" class="btn btn-default" > 전체보기</button>
-				<button type="button" class="btn btn-default" > 구매완료</button>
-				<button type="button" class="btn btn-default" > 배송중</button>
-				<button type="button" class="btn btn-default" > 거래완료</button>
+			<div class="col-md-12 text-left">
+				<button type="button"> 전체보기</button>
+				<button type="button"> 구매완료</button>
+				<button type="button"> 배송중</button>
+				<button type="button"> 거래완료</button>
 			</div>
 		</div>
+		
+		<br/>
 		
 		<table class="table table-hover table-striped">
 			<thead>
