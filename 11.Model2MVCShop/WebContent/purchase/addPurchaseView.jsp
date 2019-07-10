@@ -93,7 +93,8 @@
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             // document.getElementById('sample4_postcode').value = data.zonecode;
-            document.getElementById("sample").value = roadAddr + data.jibunAddress;
+            document.getElementById("sample").value = roadAddr;
+            //data.jibunAddress
             
             // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
 //             if(roadAddr !== ''){
@@ -200,7 +201,11 @@
 	  				
 	  				<div>
 	  					<strong>수령받으실 주소</strong>&nbsp;
+<<<<<<< HEAD
 	  					<input type="button" style="font-size: 12px;height: 30px; width: 90px; border: 1px solid #000000; background-color: #000000; color: #FFFFFF;" onclick="sample4_execDaumPostcode()" value="주소찾기">
+=======
+	  					<input type="button" style="font-size: 12px;height: 30px; width: 90px; border: 1px solid #000000; background-color: #000000; color: #FFFFFF;" onclick="sample4_execDaumPostcode()" value="주소찾기"/>
+>>>>>>> refs/remotes/origin/master
 	  					<br/>
 	  					<input type="text" id="sample" name="divyAddr" style="width: 200px; height: 25px; border: 1px solid #000000;" maxLength="20" value="${user.addr}" />
 	  					<br/>

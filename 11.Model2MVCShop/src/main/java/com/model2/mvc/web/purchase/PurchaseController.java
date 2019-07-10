@@ -91,7 +91,7 @@ public class PurchaseController {
 		productService.updateProdAmount(product);
 		model.addAttribute("purchase", purchase);
 		
-		return "forward:/purchase/addPurchase.jsp";
+		return "forward:/purchase/listPurchase";
 	}
 	
 	
@@ -204,12 +204,19 @@ public class PurchaseController {
 
 		User user = (User)session.getAttribute("user");
 		System.out.println(" listPurchase User :: " + user);
+<<<<<<< HEAD
 		searchMap.put("userId", user.getUserId());
 		
 		Map<String , Object> map=purchaseService.getPurchaseList(search, searchMap);
 		
+=======
+		Map<String , Object> map=purchaseService.getPurchaseList(search, user.getUserId());
+>>>>>>> refs/remotes/origin/master
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+<<<<<<< HEAD
 		
+=======
+>>>>>>> refs/remotes/origin/master
 		
 		System.out.println("==================== DEBUG START =======================");
 		System.out.println(" :: resultPage :: " + resultPage + " :: ");

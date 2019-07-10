@@ -79,7 +79,17 @@
 	                     </ul>
 	                 </li>
 	                 
+<<<<<<< HEAD
 <!-- 	                 <li><a href="#">etc...</a></li> -->
+=======
+	                 <li class="dropdown">
+	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+	                         <span>채팅방</span>
+	                         <span class="caret"></span>
+	                     </a>
+	                 </li>
+	                 <li><a href="#">etc...</a></li>
+>>>>>>> refs/remotes/origin/master
 	             </ul>
 	             
 	             <ul class="nav navbar-nav navbar-right">
@@ -155,8 +165,14 @@
 			$(self.location).attr("href","/purchase/listPurchase");				
 		});
 		
+		$("a:contains('채팅방')").on("click" , function(){			
+			$(self.location).attr("href","/roomchat.jsp");				
+		});
+		
 		$("a:contains('최근 본 상품')").on("click" , function(){			
 			history();			
 		});
+		
+		
 		
 	</script>  

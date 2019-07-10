@@ -9,7 +9,7 @@
 		position:relative;
 		bottom : 0;
 		background: black; 
-		color:white; 
+		color: white; 
 		width: 100%; 
 		height: 100px;
 	}
