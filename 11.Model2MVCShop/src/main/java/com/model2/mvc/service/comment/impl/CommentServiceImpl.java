@@ -38,6 +38,10 @@ public class CommentServiceImpl implements CommentService{
 	public void updateCommentLike(int commentNo) throws Exception {
 		commentDao.updateCommentLike(commentNo);	
 	}
+	@Override
+	public Comment getComment(int commentNo) throws Exception {
+		return commentDao.getComment(commentNo);
+	}
 	
 
 

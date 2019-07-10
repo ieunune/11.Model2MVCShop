@@ -9,6 +9,8 @@ public interface CommentService {
 	public void addComment(Comment comment) throws Exception;
 
 	public Map<String, Object> getCommentList(int prodNo) throws Exception;
+	
+	public Comment getComment(int commentNo) throws Exception;
 
 	//public CommentVO getProduct(int prodNo) throws Exception;
 

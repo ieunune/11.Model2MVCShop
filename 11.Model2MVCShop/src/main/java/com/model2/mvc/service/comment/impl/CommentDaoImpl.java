@@ -52,4 +52,8 @@ public class CommentDaoImpl implements CommentDao {
 	public void updateCommentLike(int commentNo) throws Exception {
 		sqlSession.update("CommentMapper.updateLike", commentNo);
 	}
+	@Override
+	public Comment getComment(int commentNo) throws Exception {
+		return sqlSession.selectOne("CommentMapper.getComment", commentNo);
+	}
 }
